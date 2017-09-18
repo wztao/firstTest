@@ -5,25 +5,34 @@ import java.util.Date;
 
 import com.eigpay.batchcard.infra.dao.chief.model.base.BaseFields;
 
-/** 
- * @author XT Huang
- * @date 2017年8月31日
+/**
+ * 
+ * @author Diego_wztao
+ * @date 2017年9月18日
+ * 
+ * @ClassName: BatchFinPostDO 
+ * @since JDK1.7
  *
  * @Description:
  *
  */
-public class BatchSettPostDO extends BaseFields{
+public class BatchFinPostDO  extends BaseFields{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 842933361908990155L;
 	
+	/**
+	 * @Fields serialVersionUID : TODO
+	 */
+	private static final long serialVersionUID = 3504629663957510583L;
+
 	private String instId;//机构编码
 	
 	private String instRole;//机构角色
 
 	private String reconCcy;//结算币种
+	
+	private String tranSet;//交易集合
+	
+	private String msgRevFlag;//撤销标识
 	
 	private Date settdate;//结算日期
 	
@@ -42,6 +51,22 @@ public class BatchSettPostDO extends BaseFields{
 	
 	private String suffix;//发卡统计数据来源标识
 	
+	public String getTranSet() {
+		return tranSet;
+	}
+
+	public void setTranSet(String tranSet) {
+		this.tranSet = tranSet;
+	}
+
+	public String getMsgRevFlag() {
+		return msgRevFlag;
+	}
+
+	public void setMsgRevFlag(String msgRevFlag) {
+		this.msgRevFlag = msgRevFlag;
+	}
+
 
 	public String getSuffix() {
 		return suffix;
@@ -153,4 +178,3 @@ public class BatchSettPostDO extends BaseFields{
 	}
 	
 }
-
