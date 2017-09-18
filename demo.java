@@ -1,36 +1,34 @@
 package com.eigpay.batchcard.infra.dao.chief.clear;
 
-import java.util.Date;
-
 import com.eigpay.batchcard.infra.dao.chief.common.GenericDao;
-import com.eigpay.batchcard.infra.dao.chief.model.clear.BatchPrincDO;
+import com.eigpay.batchcard.infra.dao.chief.model.clear.dual.princ.BatchSettPostDO;
 
 /**
  * 
  * @author Diego_wztao
- * @date 2017年9月18日
+ * @date 2017年9月15日
  * 
- * @ClassName: BatchPrincDao 
+ * @ClassName: BatchSettPostDao2 
  * @since JDK1.7
  *
  * @Description:
  *
  */
-public interface BatchPrincDao extends GenericDao<BatchPrincDO, String> {
+public interface BatchSettPostDao extends GenericDao<BatchSettPostDO, String> {
 	
+
 	/**
 	 * 
 	 * @Title: getRecordByInstIdForUpdate  
 	 * @return BatchSettPostDO
 	 * @throws 
 	 *
-	 * @param @param InstId
-	 * @param @param clearDate
+	 * @param @param batchSettPostDO
 	 * @param @return
 	 *
-	 * @Description:select for update batch_sett_post_data
+	 * @Description:select from batch_sett_post_detail
 	 */
-	BatchPrincDO getRecordByInstIdForUpdate(String InstId , Date clearDate);
+	BatchSettPostDO getRecordByInstIdForUpdate(BatchSettPostDO batchSettPostDO);
 	
 	/**
 	 * 
@@ -38,13 +36,12 @@ public interface BatchPrincDao extends GenericDao<BatchPrincDO, String> {
 	 * @return BatchSettPostDO
 	 * @throws 
 	 *
-	 * @param @param InstId
-	 * @param @param clearDate
+	 * @param @param batchSettPostDO
 	 * @param @return
 	 *
-	 * @Description:select for update batch_sett_post_data_midd
+	 * @Description:select from batch_sett_post_detail_midd
 	 */
-	BatchPrincDO getIssRecordByInstIdForUpdate(String InstId , Date clearDate);
+	BatchSettPostDO getIssRecordByInstIdForUpdate(BatchSettPostDO batchSettPostDO);
 	
 	/**
 	 * 
@@ -55,9 +52,9 @@ public interface BatchPrincDao extends GenericDao<BatchPrincDO, String> {
 	 * @param @param batchSettPostDO
 	 * @param @return
 	 *
-	 * @Description:insert to batch_sett_post_data_midd
+	 * @Description:
 	 */
-	int insertIssMiddle(BatchPrincDO batchSettPostDO);
+	int insertIssMiddle(BatchSettPostDO batchSettPostDO);
 	
 	/**
 	 * 
@@ -68,8 +65,8 @@ public interface BatchPrincDao extends GenericDao<BatchPrincDO, String> {
 	 * @param @param batchSettPostDO
 	 * @param @return
 	 *
-	 * @Description:update batch_sett_post_data_midd
+	 * @Description:
 	 */
-	int updateIssMiddle(BatchPrincDO batchSettPostDO);
+	int updateIssMiddle(BatchSettPostDO batchSettPostDO);
 
 }
