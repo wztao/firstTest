@@ -1,50 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.eigpay.feesnode.infra.dao.BatchSettParaCfgDOMapper" >
-  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchSettParaCfgDO" >
+<mapper namespace="com.eigpay.feesnode.infra.dao.BatchBinSettParaDOMapper" >
+  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchBinSettParaDO" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="ica" property="ica" jdbcType="VARCHAR" />
+    <result column="ica_name" property="icaName" jdbcType="VARCHAR" />
+    <result column="eff_date" property="effDate" jdbcType="VARCHAR" />
     <result column="sett_cfg_id" property="settCfgId" jdbcType="VARCHAR" />
-    <result column="sett_service_id" property="settServiceId" jdbcType="VARCHAR" />
-    <result column="sett_type" property="settType" jdbcType="VARCHAR" />
-    <result column="sett_ica" property="settIca" jdbcType="VARCHAR" />
-    <result column="sett_acc_num" property="settAccNum" jdbcType="VARCHAR" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="creator" property="creator" jdbcType="VARCHAR" />
     <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
     <result column="modifier" property="modifier" jdbcType="VARCHAR" />
     <result column="modify_datetime" property="modifyDatetime" jdbcType="TIMESTAMP" />
     <result column="is_enable" property="isEnable" jdbcType="BIT" />
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+    <result column="card_bin" property="cardBin" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, ica, sett_cfg_id, sett_service_id, sett_type, sett_ica, sett_acc_num, description, 
-    creator, create_datetime, modifier, modify_datetime, is_enable, is_deleted
+    id, ica, ica_name, eff_date, sett_cfg_id, creator, create_datetime, modifier, modify_datetime, 
+    is_enable, is_deleted, card_bin
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from batch_sett_para_cfg
+    from batch_bin_sett_para
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from batch_sett_para_cfg
+    delete from batch_bin_sett_para
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchSettParaCfgDO" >
-    insert into batch_sett_para_cfg (id, ica, sett_cfg_id, 
-      sett_service_id, sett_type, sett_ica, 
-      sett_acc_num, description, creator, 
+  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchBinSettParaDO" >
+    insert into batch_bin_sett_para (id, ica, ica_name, 
+      eff_date, sett_cfg_id, creator, 
       create_datetime, modifier, modify_datetime, 
-      is_enable, is_deleted)
-    values (#{id,jdbcType=BIGINT}, #{ica,jdbcType=VARCHAR}, #{settCfgId,jdbcType=VARCHAR}, 
-      #{settServiceId,jdbcType=VARCHAR}, #{settType,jdbcType=VARCHAR}, #{settIca,jdbcType=VARCHAR}, 
-      #{settAccNum,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      is_enable, is_deleted, card_bin
+      )
+    values (#{id,jdbcType=BIGINT}, #{ica,jdbcType=VARCHAR}, #{icaName,jdbcType=VARCHAR}, 
+      #{effDate,jdbcType=VARCHAR}, #{settCfgId,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
       #{createDatetime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, #{modifyDatetime,jdbcType=TIMESTAMP}, 
-      #{isEnable,jdbcType=BIT}, #{isDeleted,jdbcType=BIT})
+      #{isEnable,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}, #{cardBin,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchSettParaCfgDO" >
-    insert into batch_sett_para_cfg
+  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchBinSettParaDO" >
+    insert into batch_bin_sett_para
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -52,23 +50,14 @@
       <if test="ica != null" >
         ica,
       </if>
+      <if test="icaName != null" >
+        ica_name,
+      </if>
+      <if test="effDate != null" >
+        eff_date,
+      </if>
       <if test="settCfgId != null" >
         sett_cfg_id,
-      </if>
-      <if test="settServiceId != null" >
-        sett_service_id,
-      </if>
-      <if test="settType != null" >
-        sett_type,
-      </if>
-      <if test="settIca != null" >
-        sett_ica,
-      </if>
-      <if test="settAccNum != null" >
-        sett_acc_num,
-      </if>
-      <if test="description != null" >
-        description,
       </if>
       <if test="creator != null" >
         creator,
@@ -88,6 +77,9 @@
       <if test="isDeleted != null" >
         is_deleted,
       </if>
+      <if test="cardBin != null" >
+        card_bin,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -96,23 +88,14 @@
       <if test="ica != null" >
         #{ica,jdbcType=VARCHAR},
       </if>
+      <if test="icaName != null" >
+        #{icaName,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        #{effDate,jdbcType=VARCHAR},
+      </if>
       <if test="settCfgId != null" >
         #{settCfgId,jdbcType=VARCHAR},
-      </if>
-      <if test="settServiceId != null" >
-        #{settServiceId,jdbcType=VARCHAR},
-      </if>
-      <if test="settType != null" >
-        #{settType,jdbcType=VARCHAR},
-      </if>
-      <if test="settIca != null" >
-        #{settIca,jdbcType=VARCHAR},
-      </if>
-      <if test="settAccNum != null" >
-        #{settAccNum,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
       </if>
       <if test="creator != null" >
         #{creator,jdbcType=VARCHAR},
@@ -132,31 +115,25 @@
       <if test="isDeleted != null" >
         #{isDeleted,jdbcType=BIT},
       </if>
+      <if test="cardBin != null" >
+        #{cardBin,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchSettParaCfgDO" >
-    update batch_sett_para_cfg
+  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchBinSettParaDO" >
+    update batch_bin_sett_para
     <set >
       <if test="ica != null" >
         ica = #{ica,jdbcType=VARCHAR},
       </if>
+      <if test="icaName != null" >
+        ica_name = #{icaName,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null" >
+        eff_date = #{effDate,jdbcType=VARCHAR},
+      </if>
       <if test="settCfgId != null" >
         sett_cfg_id = #{settCfgId,jdbcType=VARCHAR},
-      </if>
-      <if test="settServiceId != null" >
-        sett_service_id = #{settServiceId,jdbcType=VARCHAR},
-      </if>
-      <if test="settType != null" >
-        sett_type = #{settType,jdbcType=VARCHAR},
-      </if>
-      <if test="settIca != null" >
-        sett_ica = #{settIca,jdbcType=VARCHAR},
-      </if>
-      <if test="settAccNum != null" >
-        sett_acc_num = #{settAccNum,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="creator != null" >
         creator = #{creator,jdbcType=VARCHAR},
@@ -176,24 +153,25 @@
       <if test="isDeleted != null" >
         is_deleted = #{isDeleted,jdbcType=BIT},
       </if>
+      <if test="cardBin != null" >
+        card_bin = #{cardBin,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchSettParaCfgDO" >
-    update batch_sett_para_cfg
+  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchBinSettParaDO" >
+    update batch_bin_sett_para
     set ica = #{ica,jdbcType=VARCHAR},
+      ica_name = #{icaName,jdbcType=VARCHAR},
+      eff_date = #{effDate,jdbcType=VARCHAR},
       sett_cfg_id = #{settCfgId,jdbcType=VARCHAR},
-      sett_service_id = #{settServiceId,jdbcType=VARCHAR},
-      sett_type = #{settType,jdbcType=VARCHAR},
-      sett_ica = #{settIca,jdbcType=VARCHAR},
-      sett_acc_num = #{settAccNum,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
       creator = #{creator,jdbcType=VARCHAR},
       create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
       modifier = #{modifier,jdbcType=VARCHAR},
       modify_datetime = #{modifyDatetime,jdbcType=TIMESTAMP},
       is_enable = #{isEnable,jdbcType=BIT},
-      is_deleted = #{isDeleted,jdbcType=BIT}
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      card_bin = #{cardBin,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
