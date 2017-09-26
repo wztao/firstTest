@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:component-scan base-package="com.eigpay.epm.infra.cache"/>
+	
+	<context:property-placeholder location="classpath*:/jedis.properties" />
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--最大连接数 -->
+        <property name="maxTotal" value="${redis.pool.maxActive}" />
+        <!--最大空闲连接数 -->
+        <property name="maxIdle" value="${redis.pool.maxIdle}" />
+        <!--初始化连接数 -->
+        <property name="minIdle" value="${redis.pool.minIdle}" />
+        <!--最大等待时间 -->
+        <property name="maxWaitMillis" value="${redis.pool.maxWait}" />
+        <!--定时对线程池中空闲的链接进行validateObject校验 -->
+        <property name="testWhileIdle" value="true" /> 
+        <property name="testOnBorrow" value="false" />
+        <!--在进行returnObject对返回的connection进行validateObject校验 -->
+        <property name="testOnReturn" value="false" />
+    </bean>
+
+<!--     <bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy">
+        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg index="1" value="${redis.host}" />
+        <constructor-arg index="2" value="${redis.port}" type="int" />
+        <constructor-arg index="3" value="${redis.timeout}" type="int" />
+    </bean> -->
+    
+    	<!-- Spring提供的Redis连接工厂 -->
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+		<!-- 连接池配置. -->
+		<property name="poolConfig" ref="jedisPoolConfig" />
+		<!-- Redis服务主机. -->
+		<property name="hostName" value="${redis.host}" />
+		<!-- Redis服务端口号. -->
+		<property name="port" value="${redis.port}" />
+		<!-- Redis服务连接密码. -->
+		<property name="password" value="${redis.password}" />
+		<!-- 连超时设置. -->
+		<property name="timeout" value="${redis.timeout}" />
+		<!-- 是否使用连接池. -->
+		<property name="usePool" value="true" />
+	</bean>
+	<!-- Spring提供的访问Redis类. -->
+	<bean id="jedisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jedisConnectionFactory" />
+		<property name="keySerializer">
+			<bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+		</property>
+		<property name="valueSerializer">
+			<bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+		</property>
+		<property name="hashKeySerializer">     
+           <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>     
+        </property>   
+        <property name="hashValueSerializer">   
+           <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>     
+        </property> 
+	</bean>
+    
+</beans>
