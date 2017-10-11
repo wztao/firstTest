@@ -58,7 +58,7 @@
 
     private String acceptorId;
 
-    private String acceporName;
+    private String acceptorName;
 
     private String addData1;
 
@@ -119,14 +119,6 @@
     private String panEncrypt;
 
     private String respCode;
-
-    private String acqSettCfgId;
-
-    private String issSettCfgId;
-
-    private String cardBin;
-
-    private String msgRevFlag;
 
     public Long getId() {
         return id;
@@ -368,12 +360,12 @@
         this.acceptorId = acceptorId == null ? null : acceptorId.trim();
     }
 
-    public String getAcceporName() {
-        return acceporName;
+    public String getAcceptorName() {
+        return acceptorName;
     }
 
-    public void setAcceporName(String acceporName) {
-        this.acceporName = acceporName == null ? null : acceporName.trim();
+    public void setAcceptorName(String acceptorName) {
+        this.acceptorName = acceptorName == null ? null : acceptorName.trim();
     }
 
     public String getAddData1() {
@@ -614,36 +606,4 @@
 
     public void setRespCode(String respCode) {
         this.respCode = respCode == null ? null : respCode.trim();
-    }
-
-    public String getAcqSettCfgId() {
-        return acqSettCfgId;
-    }
-
-    public void setAcqSettCfgId(String acqSettCfgId) {
-        this.acqSettCfgId = acqSettCfgId == null ? null : acqSettCfgId.trim();
-    }
-
-    public String getIssSettCfgId() {
-        return issSettCfgId;
-    }
-
-    public void setIssSettCfgId(String issSettCfgId) {
-        this.issSettCfgId = issSettCfgId == null ? null : issSettCfgId.trim();
-    }
-
-    public String getCardBin() {
-        return cardBin;
-    }
-
-    public void setCardBin(String cardBin) {
-        this.cardBin = cardBin == null ? null : cardBin.trim();
-    }
-
-    public String getMsgRevFlag() {
-        return msgRevFlag;
-    }
-
-    public void setMsgRevFlag(String msgRevFlag) {
-        this.msgRevFlag = msgRevFlag == null ? null : msgRevFlag.trim();
     }
