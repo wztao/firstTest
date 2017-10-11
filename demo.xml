@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.eigpay.feesnode.infra.dao.BatchDualAuthSucDOMapper" >
-  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchDualAuthSucDO" >
+<mapper namespace="com.eigpay.feesnode.infra.dao.BatchFailNonFiDOMapper" >
+  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchFailNonFiDO" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="msg_type" property="msgType" jdbcType="VARCHAR" />
     <result column="pan" property="pan" jdbcType="VARCHAR" />
@@ -32,7 +32,7 @@
     <result column="service_code" property="serviceCode" jdbcType="VARCHAR" />
     <result column="terminal_id" property="terminalId" jdbcType="VARCHAR" />
     <result column="acceptor_id" property="acceptorId" jdbcType="VARCHAR" />
-    <result column="acceptor_name" property="acceptorName" jdbcType="VARCHAR" />
+    <result column="accepor_name" property="acceporName" jdbcType="VARCHAR" />
     <result column="add_data_1" property="addData1" jdbcType="VARCHAR" />
     <result column="tran_ccy" property="tranCcy" jdbcType="VARCHAR" />
     <result column="recon_ccy" property="reconCcy" jdbcType="VARCHAR" />
@@ -63,30 +63,35 @@
     <result column="msg_status" property="msgStatus" jdbcType="VARCHAR" />
     <result column="pan_encrypt" property="panEncrypt" jdbcType="VARCHAR" />
     <result column="resp_code" property="respCode" jdbcType="VARCHAR" />
+    <result column="acq_sett_cfg_id" property="acqSettCfgId" jdbcType="VARCHAR" />
+    <result column="iss_sett_cfg_id" property="issSettCfgId" jdbcType="VARCHAR" />
+    <result column="card_bin" property="cardBin" jdbcType="VARCHAR" />
+    <result column="msg_rev_flag" property="msgRevFlag" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, msg_type, pan, pcode, tran_amount, recon_amount, bill_amount, recon_rate, bill_rate, 
     stan, tran_date, tran_time, local_time, expire_date, pos_entry_mode, pos_data, pos_pin_cap, 
     card_seq, func_code, reason_code, mcc, orig_amount, acq_refer_data, acq_inst_id, 
-    for_inst_id, refer_no, approve_code, service_code, terminal_id, acceptor_id, acceptor_name, 
+    for_inst_id, refer_no, approve_code, service_code, terminal_id, acceptor_id, accepor_name, 
     add_data_1, tran_ccy, recon_ccy, bill_ccy, add_amount, icc_rela_data, add_data_2, 
     tran_life_cycle_id, issuer, acquirer, recv_inst_id, ccy_conv_amount, add_data_3, 
     add_data_4, add_data_5, clear_date, clear_status, sett_date, reversal_status, creator, 
     create_datetime, modifier, modify_datetime, is_enable, is_deleted, acq_msg_flag, 
-    iss_msg_flag, msg_status, pan_encrypt, resp_code
+    iss_msg_flag, msg_status, pan_encrypt, resp_code, acq_sett_cfg_id, iss_sett_cfg_id, 
+    card_bin, msg_rev_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from batch_dual_auth_success_data
+    from batch_fail_nonfinancial_data
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from batch_dual_auth_success_data
+    delete from batch_fail_nonfinancial_data
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchDualAuthSucDO" >
-    insert into batch_dual_auth_success_data (id, msg_type, pan, 
+  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchFailNonFiDO" >
+    insert into batch_fail_nonfinancial_data (id, msg_type, pan, 
       pcode, tran_amount, recon_amount, 
       bill_amount, recon_rate, bill_rate, 
       stan, tran_date, tran_time, 
@@ -96,7 +101,7 @@
       orig_amount, acq_refer_data, acq_inst_id, 
       for_inst_id, refer_no, approve_code, 
       service_code, terminal_id, acceptor_id, 
-      acceptor_name, add_data_1, tran_ccy, 
+      accepor_name, add_data_1, tran_ccy, 
       recon_ccy, bill_ccy, add_amount, 
       icc_rela_data, add_data_2, tran_life_cycle_id, 
       issuer, acquirer, recv_inst_id, 
@@ -106,7 +111,8 @@
       create_datetime, modifier, modify_datetime, 
       is_enable, is_deleted, acq_msg_flag, 
       iss_msg_flag, msg_status, pan_encrypt, 
-      resp_code)
+      resp_code, acq_sett_cfg_id, iss_sett_cfg_id, 
+      card_bin, msg_rev_flag)
     values (#{id,jdbcType=BIGINT}, #{msgType,jdbcType=VARCHAR}, #{pan,jdbcType=VARCHAR}, 
       #{pcode,jdbcType=VARCHAR}, #{tranAmount,jdbcType=DECIMAL}, #{reconAmount,jdbcType=DECIMAL}, 
       #{billAmount,jdbcType=DECIMAL}, #{reconRate,jdbcType=DECIMAL}, #{billRate,jdbcType=DECIMAL}, 
@@ -117,7 +123,7 @@
       #{origAmount,jdbcType=DECIMAL}, #{acqReferData,jdbcType=VARCHAR}, #{acqInstId,jdbcType=VARCHAR}, 
       #{forInstId,jdbcType=VARCHAR}, #{referNo,jdbcType=VARCHAR}, #{approveCode,jdbcType=VARCHAR}, 
       #{serviceCode,jdbcType=VARCHAR}, #{terminalId,jdbcType=VARCHAR}, #{acceptorId,jdbcType=VARCHAR}, 
-      #{acceptorName,jdbcType=VARCHAR}, #{addData1,jdbcType=VARCHAR}, #{tranCcy,jdbcType=VARCHAR}, 
+      #{acceporName,jdbcType=VARCHAR}, #{addData1,jdbcType=VARCHAR}, #{tranCcy,jdbcType=VARCHAR}, 
       #{reconCcy,jdbcType=VARCHAR}, #{billCcy,jdbcType=VARCHAR}, #{addAmount,jdbcType=VARCHAR}, 
       #{iccRelaData,jdbcType=VARCHAR}, #{addData2,jdbcType=VARCHAR}, #{tranLifeCycleId,jdbcType=VARCHAR}, 
       #{issuer,jdbcType=VARCHAR}, #{acquirer,jdbcType=VARCHAR}, #{recvInstId,jdbcType=VARCHAR}, 
@@ -127,10 +133,11 @@
       #{createDatetime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, #{modifyDatetime,jdbcType=TIMESTAMP}, 
       #{isEnable,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}, #{acqMsgFlag,jdbcType=VARCHAR}, 
       #{issMsgFlag,jdbcType=VARCHAR}, #{msgStatus,jdbcType=VARCHAR}, #{panEncrypt,jdbcType=VARCHAR}, 
-      #{respCode,jdbcType=VARCHAR})
+      #{respCode,jdbcType=VARCHAR}, #{acqSettCfgId,jdbcType=VARCHAR}, #{issSettCfgId,jdbcType=VARCHAR}, 
+      #{cardBin,jdbcType=VARCHAR}, #{msgRevFlag,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchDualAuthSucDO" >
-    insert into batch_dual_auth_success_data
+  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchFailNonFiDO" >
+    insert into batch_fail_nonfinancial_data
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -222,8 +229,8 @@
       <if test="acceptorId != null" >
         acceptor_id,
       </if>
-      <if test="acceptorName != null" >
-        acceptor_name,
+      <if test="acceporName != null" >
+        accepor_name,
       </if>
       <if test="addData1 != null" >
         add_data_1,
@@ -314,6 +321,18 @@
       </if>
       <if test="respCode != null" >
         resp_code,
+      </if>
+      <if test="acqSettCfgId != null" >
+        acq_sett_cfg_id,
+      </if>
+      <if test="issSettCfgId != null" >
+        iss_sett_cfg_id,
+      </if>
+      <if test="cardBin != null" >
+        card_bin,
+      </if>
+      <if test="msgRevFlag != null" >
+        msg_rev_flag,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -407,8 +426,8 @@
       <if test="acceptorId != null" >
         #{acceptorId,jdbcType=VARCHAR},
       </if>
-      <if test="acceptorName != null" >
-        #{acceptorName,jdbcType=VARCHAR},
+      <if test="acceporName != null" >
+        #{acceporName,jdbcType=VARCHAR},
       </if>
       <if test="addData1 != null" >
         #{addData1,jdbcType=VARCHAR},
@@ -500,10 +519,22 @@
       <if test="respCode != null" >
         #{respCode,jdbcType=VARCHAR},
       </if>
+      <if test="acqSettCfgId != null" >
+        #{acqSettCfgId,jdbcType=VARCHAR},
+      </if>
+      <if test="issSettCfgId != null" >
+        #{issSettCfgId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBin != null" >
+        #{cardBin,jdbcType=VARCHAR},
+      </if>
+      <if test="msgRevFlag != null" >
+        #{msgRevFlag,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchDualAuthSucDO" >
-    update batch_dual_auth_success_data
+  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchFailNonFiDO" >
+    update batch_fail_nonfinancial_data
     <set >
       <if test="msgType != null" >
         msg_type = #{msgType,jdbcType=VARCHAR},
@@ -592,8 +623,8 @@
       <if test="acceptorId != null" >
         acceptor_id = #{acceptorId,jdbcType=VARCHAR},
       </if>
-      <if test="acceptorName != null" >
-        acceptor_name = #{acceptorName,jdbcType=VARCHAR},
+      <if test="acceporName != null" >
+        accepor_name = #{acceporName,jdbcType=VARCHAR},
       </if>
       <if test="addData1 != null" >
         add_data_1 = #{addData1,jdbcType=VARCHAR},
@@ -685,11 +716,23 @@
       <if test="respCode != null" >
         resp_code = #{respCode,jdbcType=VARCHAR},
       </if>
+      <if test="acqSettCfgId != null" >
+        acq_sett_cfg_id = #{acqSettCfgId,jdbcType=VARCHAR},
+      </if>
+      <if test="issSettCfgId != null" >
+        iss_sett_cfg_id = #{issSettCfgId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardBin != null" >
+        card_bin = #{cardBin,jdbcType=VARCHAR},
+      </if>
+      <if test="msgRevFlag != null" >
+        msg_rev_flag = #{msgRevFlag,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchDualAuthSucDO" >
-    update batch_dual_auth_success_data
+  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchFailNonFiDO" >
+    update batch_fail_nonfinancial_data
     set msg_type = #{msgType,jdbcType=VARCHAR},
       pan = #{pan,jdbcType=VARCHAR},
       pcode = #{pcode,jdbcType=VARCHAR},
@@ -719,7 +762,7 @@
       service_code = #{serviceCode,jdbcType=VARCHAR},
       terminal_id = #{terminalId,jdbcType=VARCHAR},
       acceptor_id = #{acceptorId,jdbcType=VARCHAR},
-      acceptor_name = #{acceptorName,jdbcType=VARCHAR},
+      accepor_name = #{acceporName,jdbcType=VARCHAR},
       add_data_1 = #{addData1,jdbcType=VARCHAR},
       tran_ccy = #{tranCcy,jdbcType=VARCHAR},
       recon_ccy = #{reconCcy,jdbcType=VARCHAR},
@@ -749,7 +792,11 @@
       iss_msg_flag = #{issMsgFlag,jdbcType=VARCHAR},
       msg_status = #{msgStatus,jdbcType=VARCHAR},
       pan_encrypt = #{panEncrypt,jdbcType=VARCHAR},
-      resp_code = #{respCode,jdbcType=VARCHAR}
+      resp_code = #{respCode,jdbcType=VARCHAR},
+      acq_sett_cfg_id = #{acqSettCfgId,jdbcType=VARCHAR},
+      iss_sett_cfg_id = #{issSettCfgId,jdbcType=VARCHAR},
+      card_bin = #{cardBin,jdbcType=VARCHAR},
+      msg_rev_flag = #{msgRevFlag,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
