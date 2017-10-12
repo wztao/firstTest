@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.eigpay.feesnode.infra.dao.BatchDisSwFeePostSumDOMapper" >
-  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchDisSwFeePostSumDO" >
+<mapper namespace="com.eigpay.feesnode.infra.dao.BatchDisInterFeePostSumDOMapper" >
+  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchDisInterFeePostSumDO" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="inst_id" property="instId" jdbcType="VARCHAR" />
     <result column="agent_id" property="agentId" jdbcType="VARCHAR" />
     <result column="sett_date" property="settDate" jdbcType="DATE" />
-    <result column="recon_ccy" property="reconCcy" jdbcType="VARCHAR" />
-    <result column="collect_or_not" property="collectOrNot" jdbcType="VARCHAR" />
     <result column="total_fee_amount" property="totalFeeAmount" jdbcType="DECIMAL" />
-    <result column="tran_counts" property="tranCounts" jdbcType="INTEGER" />
+    <result column="recon_ccy" property="reconCcy" jdbcType="VARCHAR" />
     <result column="creator" property="creator" jdbcType="VARCHAR" />
     <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
     <result column="modifier" property="modifier" jdbcType="VARCHAR" />
@@ -18,33 +16,33 @@
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, inst_id, agent_id, sett_date, recon_ccy, collect_or_not, total_fee_amount, tran_counts, 
-    creator, create_datetime, modifier, modify_datetime, is_enable, is_deleted
+    id, inst_id, agent_id, sett_date, total_fee_amount, recon_ccy, creator, create_datetime, 
+    modifier, modify_datetime, is_enable, is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from batch_disp_sw_fee_post_sum_data
+    from batch_disp_inter_fee_post_sum_data
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from batch_disp_sw_fee_post_sum_data
+    delete from batch_disp_inter_fee_post_sum_data
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchDisSwFeePostSumDO" >
-    insert into batch_disp_sw_fee_post_sum_data (id, inst_id, agent_id, 
-      sett_date, recon_ccy, collect_or_not, 
-      total_fee_amount, tran_counts, creator, 
-      create_datetime, modifier, modify_datetime, 
-      is_enable, is_deleted)
+  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchDisInterFeePostSumDO" >
+    insert into batch_disp_inter_fee_post_sum_data (id, inst_id, agent_id, 
+      sett_date, total_fee_amount, recon_ccy, 
+      creator, create_datetime, modifier, 
+      modify_datetime, is_enable, is_deleted
+      )
     values (#{id,jdbcType=BIGINT}, #{instId,jdbcType=VARCHAR}, #{agentId,jdbcType=VARCHAR}, 
-      #{settDate,jdbcType=DATE}, #{reconCcy,jdbcType=VARCHAR}, #{collectOrNot,jdbcType=VARCHAR}, 
-      #{totalFeeAmount,jdbcType=DECIMAL}, #{tranCounts,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR}, 
-      #{createDatetime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, #{modifyDatetime,jdbcType=TIMESTAMP}, 
-      #{isEnable,jdbcType=BIT}, #{isDeleted,jdbcType=BIT})
+      #{settDate,jdbcType=DATE}, #{totalFeeAmount,jdbcType=DECIMAL}, #{reconCcy,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
+      #{modifyDatetime,jdbcType=TIMESTAMP}, #{isEnable,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchDisSwFeePostSumDO" >
-    insert into batch_disp_sw_fee_post_sum_data
+  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchDisInterFeePostSumDO" >
+    insert into batch_disp_inter_fee_post_sum_data
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -58,17 +56,11 @@
       <if test="settDate != null" >
         sett_date,
       </if>
-      <if test="reconCcy != null" >
-        recon_ccy,
-      </if>
-      <if test="collectOrNot != null" >
-        collect_or_not,
-      </if>
       <if test="totalFeeAmount != null" >
         total_fee_amount,
       </if>
-      <if test="tranCounts != null" >
-        tran_counts,
+      <if test="reconCcy != null" >
+        recon_ccy,
       </if>
       <if test="creator != null" >
         creator,
@@ -102,17 +94,11 @@
       <if test="settDate != null" >
         #{settDate,jdbcType=DATE},
       </if>
-      <if test="reconCcy != null" >
-        #{reconCcy,jdbcType=VARCHAR},
-      </if>
-      <if test="collectOrNot != null" >
-        #{collectOrNot,jdbcType=VARCHAR},
-      </if>
       <if test="totalFeeAmount != null" >
         #{totalFeeAmount,jdbcType=DECIMAL},
       </if>
-      <if test="tranCounts != null" >
-        #{tranCounts,jdbcType=INTEGER},
+      <if test="reconCcy != null" >
+        #{reconCcy,jdbcType=VARCHAR},
       </if>
       <if test="creator != null" >
         #{creator,jdbcType=VARCHAR},
@@ -134,8 +120,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchDisSwFeePostSumDO" >
-    update batch_disp_sw_fee_post_sum_data
+  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchDisInterFeePostSumDO" >
+    update batch_disp_inter_fee_post_sum_data
     <set >
       <if test="instId != null" >
         inst_id = #{instId,jdbcType=VARCHAR},
@@ -146,17 +132,11 @@
       <if test="settDate != null" >
         sett_date = #{settDate,jdbcType=DATE},
       </if>
-      <if test="reconCcy != null" >
-        recon_ccy = #{reconCcy,jdbcType=VARCHAR},
-      </if>
-      <if test="collectOrNot != null" >
-        collect_or_not = #{collectOrNot,jdbcType=VARCHAR},
-      </if>
       <if test="totalFeeAmount != null" >
         total_fee_amount = #{totalFeeAmount,jdbcType=DECIMAL},
       </if>
-      <if test="tranCounts != null" >
-        tran_counts = #{tranCounts,jdbcType=INTEGER},
+      <if test="reconCcy != null" >
+        recon_ccy = #{reconCcy,jdbcType=VARCHAR},
       </if>
       <if test="creator != null" >
         creator = #{creator,jdbcType=VARCHAR},
@@ -179,15 +159,13 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchDisSwFeePostSumDO" >
-    update batch_disp_sw_fee_post_sum_data
+  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchDisInterFeePostSumDO" >
+    update batch_disp_inter_fee_post_sum_data
     set inst_id = #{instId,jdbcType=VARCHAR},
       agent_id = #{agentId,jdbcType=VARCHAR},
       sett_date = #{settDate,jdbcType=DATE},
-      recon_ccy = #{reconCcy,jdbcType=VARCHAR},
-      collect_or_not = #{collectOrNot,jdbcType=VARCHAR},
       total_fee_amount = #{totalFeeAmount,jdbcType=DECIMAL},
-      tran_counts = #{tranCounts,jdbcType=INTEGER},
+      recon_ccy = #{reconCcy,jdbcType=VARCHAR},
       creator = #{creator,jdbcType=VARCHAR},
       create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
       modifier = #{modifier,jdbcType=VARCHAR},
