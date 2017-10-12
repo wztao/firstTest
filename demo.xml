@@ -1,293 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.eigpay.feesnode.infra.dao.BatchFailNonFiDOMapper" >
-  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchFailNonFiDO" >
+<mapper namespace="com.eigpay.feesnode.infra.dao.BatchDisSwFeePostSumDOMapper" >
+  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchDisSwFeePostSumDO" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="msg_type" property="msgType" jdbcType="VARCHAR" />
-    <result column="pan" property="pan" jdbcType="VARCHAR" />
-    <result column="pcode" property="pcode" jdbcType="VARCHAR" />
-    <result column="tran_amount" property="tranAmount" jdbcType="DECIMAL" />
-    <result column="recon_amount" property="reconAmount" jdbcType="DECIMAL" />
-    <result column="bill_amount" property="billAmount" jdbcType="DECIMAL" />
-    <result column="recon_rate" property="reconRate" jdbcType="DECIMAL" />
-    <result column="bill_rate" property="billRate" jdbcType="DECIMAL" />
-    <result column="stan" property="stan" jdbcType="VARCHAR" />
-    <result column="tran_date" property="tranDate" jdbcType="DATE" />
-    <result column="tran_time" property="tranTime" jdbcType="TIMESTAMP" />
-    <result column="local_time" property="localTime" jdbcType="TIMESTAMP" />
-    <result column="expire_date" property="expireDate" jdbcType="VARCHAR" />
-    <result column="pos_entry_mode" property="posEntryMode" jdbcType="VARCHAR" />
-    <result column="pos_data" property="posData" jdbcType="VARCHAR" />
-    <result column="pos_pin_cap" property="posPinCap" jdbcType="VARCHAR" />
-    <result column="card_seq" property="cardSeq" jdbcType="VARCHAR" />
-    <result column="func_code" property="funcCode" jdbcType="VARCHAR" />
-    <result column="reason_code" property="reasonCode" jdbcType="VARCHAR" />
-    <result column="mcc" property="mcc" jdbcType="VARCHAR" />
-    <result column="orig_amount" property="origAmount" jdbcType="DECIMAL" />
-    <result column="acq_refer_data" property="acqReferData" jdbcType="VARCHAR" />
-    <result column="acq_inst_id" property="acqInstId" jdbcType="VARCHAR" />
-    <result column="for_inst_id" property="forInstId" jdbcType="VARCHAR" />
-    <result column="refer_no" property="referNo" jdbcType="VARCHAR" />
-    <result column="approve_code" property="approveCode" jdbcType="VARCHAR" />
-    <result column="service_code" property="serviceCode" jdbcType="VARCHAR" />
-    <result column="terminal_id" property="terminalId" jdbcType="VARCHAR" />
-    <result column="acceptor_id" property="acceptorId" jdbcType="VARCHAR" />
-    <result column="accepor_name" property="acceporName" jdbcType="VARCHAR" />
-    <result column="add_data_1" property="addData1" jdbcType="VARCHAR" />
-    <result column="tran_ccy" property="tranCcy" jdbcType="VARCHAR" />
-    <result column="recon_ccy" property="reconCcy" jdbcType="VARCHAR" />
-    <result column="bill_ccy" property="billCcy" jdbcType="VARCHAR" />
-    <result column="add_amount" property="addAmount" jdbcType="VARCHAR" />
-    <result column="icc_rela_data" property="iccRelaData" jdbcType="VARCHAR" />
-    <result column="add_data_2" property="addData2" jdbcType="VARCHAR" />
-    <result column="tran_life_cycle_id" property="tranLifeCycleId" jdbcType="VARCHAR" />
-    <result column="issuer" property="issuer" jdbcType="VARCHAR" />
-    <result column="acquirer" property="acquirer" jdbcType="VARCHAR" />
-    <result column="recv_inst_id" property="recvInstId" jdbcType="VARCHAR" />
-    <result column="ccy_conv_amount" property="ccyConvAmount" jdbcType="DECIMAL" />
-    <result column="add_data_3" property="addData3" jdbcType="VARCHAR" />
-    <result column="add_data_4" property="addData4" jdbcType="VARCHAR" />
-    <result column="add_data_5" property="addData5" jdbcType="VARCHAR" />
-    <result column="clear_date" property="clearDate" jdbcType="DATE" />
-    <result column="clear_status" property="clearStatus" jdbcType="VARCHAR" />
+    <result column="inst_id" property="instId" jdbcType="VARCHAR" />
+    <result column="agent_id" property="agentId" jdbcType="VARCHAR" />
     <result column="sett_date" property="settDate" jdbcType="DATE" />
-    <result column="reversal_status" property="reversalStatus" jdbcType="VARCHAR" />
+    <result column="recon_ccy" property="reconCcy" jdbcType="VARCHAR" />
+    <result column="collect_or_not" property="collectOrNot" jdbcType="VARCHAR" />
+    <result column="total_fee_amount" property="totalFeeAmount" jdbcType="DECIMAL" />
+    <result column="tran_counts" property="tranCounts" jdbcType="INTEGER" />
     <result column="creator" property="creator" jdbcType="VARCHAR" />
     <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
     <result column="modifier" property="modifier" jdbcType="VARCHAR" />
     <result column="modify_datetime" property="modifyDatetime" jdbcType="TIMESTAMP" />
     <result column="is_enable" property="isEnable" jdbcType="BIT" />
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
-    <result column="acq_msg_flag" property="acqMsgFlag" jdbcType="VARCHAR" />
-    <result column="iss_msg_flag" property="issMsgFlag" jdbcType="VARCHAR" />
-    <result column="msg_status" property="msgStatus" jdbcType="VARCHAR" />
-    <result column="pan_encrypt" property="panEncrypt" jdbcType="VARCHAR" />
-    <result column="resp_code" property="respCode" jdbcType="VARCHAR" />
-    <result column="acq_sett_cfg_id" property="acqSettCfgId" jdbcType="VARCHAR" />
-    <result column="iss_sett_cfg_id" property="issSettCfgId" jdbcType="VARCHAR" />
-    <result column="card_bin" property="cardBin" jdbcType="VARCHAR" />
-    <result column="msg_rev_flag" property="msgRevFlag" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, msg_type, pan, pcode, tran_amount, recon_amount, bill_amount, recon_rate, bill_rate, 
-    stan, tran_date, tran_time, local_time, expire_date, pos_entry_mode, pos_data, pos_pin_cap, 
-    card_seq, func_code, reason_code, mcc, orig_amount, acq_refer_data, acq_inst_id, 
-    for_inst_id, refer_no, approve_code, service_code, terminal_id, acceptor_id, accepor_name, 
-    add_data_1, tran_ccy, recon_ccy, bill_ccy, add_amount, icc_rela_data, add_data_2, 
-    tran_life_cycle_id, issuer, acquirer, recv_inst_id, ccy_conv_amount, add_data_3, 
-    add_data_4, add_data_5, clear_date, clear_status, sett_date, reversal_status, creator, 
-    create_datetime, modifier, modify_datetime, is_enable, is_deleted, acq_msg_flag, 
-    iss_msg_flag, msg_status, pan_encrypt, resp_code, acq_sett_cfg_id, iss_sett_cfg_id, 
-    card_bin, msg_rev_flag
+    id, inst_id, agent_id, sett_date, recon_ccy, collect_or_not, total_fee_amount, tran_counts, 
+    creator, create_datetime, modifier, modify_datetime, is_enable, is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from batch_fail_nonfinancial_data
+    from batch_disp_sw_fee_post_sum_data
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from batch_fail_nonfinancial_data
+    delete from batch_disp_sw_fee_post_sum_data
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchFailNonFiDO" >
-    insert into batch_fail_nonfinancial_data (id, msg_type, pan, 
-      pcode, tran_amount, recon_amount, 
-      bill_amount, recon_rate, bill_rate, 
-      stan, tran_date, tran_time, 
-      local_time, expire_date, pos_entry_mode, 
-      pos_data, pos_pin_cap, card_seq, 
-      func_code, reason_code, mcc, 
-      orig_amount, acq_refer_data, acq_inst_id, 
-      for_inst_id, refer_no, approve_code, 
-      service_code, terminal_id, acceptor_id, 
-      accepor_name, add_data_1, tran_ccy, 
-      recon_ccy, bill_ccy, add_amount, 
-      icc_rela_data, add_data_2, tran_life_cycle_id, 
-      issuer, acquirer, recv_inst_id, 
-      ccy_conv_amount, add_data_3, add_data_4, 
-      add_data_5, clear_date, clear_status, 
-      sett_date, reversal_status, creator, 
+  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchDisSwFeePostSumDO" >
+    insert into batch_disp_sw_fee_post_sum_data (id, inst_id, agent_id, 
+      sett_date, recon_ccy, collect_or_not, 
+      total_fee_amount, tran_counts, creator, 
       create_datetime, modifier, modify_datetime, 
-      is_enable, is_deleted, acq_msg_flag, 
-      iss_msg_flag, msg_status, pan_encrypt, 
-      resp_code, acq_sett_cfg_id, iss_sett_cfg_id, 
-      card_bin, msg_rev_flag)
-    values (#{id,jdbcType=BIGINT}, #{msgType,jdbcType=VARCHAR}, #{pan,jdbcType=VARCHAR}, 
-      #{pcode,jdbcType=VARCHAR}, #{tranAmount,jdbcType=DECIMAL}, #{reconAmount,jdbcType=DECIMAL}, 
-      #{billAmount,jdbcType=DECIMAL}, #{reconRate,jdbcType=DECIMAL}, #{billRate,jdbcType=DECIMAL}, 
-      #{stan,jdbcType=VARCHAR}, #{tranDate,jdbcType=DATE}, #{tranTime,jdbcType=TIMESTAMP}, 
-      #{localTime,jdbcType=TIMESTAMP}, #{expireDate,jdbcType=VARCHAR}, #{posEntryMode,jdbcType=VARCHAR}, 
-      #{posData,jdbcType=VARCHAR}, #{posPinCap,jdbcType=VARCHAR}, #{cardSeq,jdbcType=VARCHAR}, 
-      #{funcCode,jdbcType=VARCHAR}, #{reasonCode,jdbcType=VARCHAR}, #{mcc,jdbcType=VARCHAR}, 
-      #{origAmount,jdbcType=DECIMAL}, #{acqReferData,jdbcType=VARCHAR}, #{acqInstId,jdbcType=VARCHAR}, 
-      #{forInstId,jdbcType=VARCHAR}, #{referNo,jdbcType=VARCHAR}, #{approveCode,jdbcType=VARCHAR}, 
-      #{serviceCode,jdbcType=VARCHAR}, #{terminalId,jdbcType=VARCHAR}, #{acceptorId,jdbcType=VARCHAR}, 
-      #{acceporName,jdbcType=VARCHAR}, #{addData1,jdbcType=VARCHAR}, #{tranCcy,jdbcType=VARCHAR}, 
-      #{reconCcy,jdbcType=VARCHAR}, #{billCcy,jdbcType=VARCHAR}, #{addAmount,jdbcType=VARCHAR}, 
-      #{iccRelaData,jdbcType=VARCHAR}, #{addData2,jdbcType=VARCHAR}, #{tranLifeCycleId,jdbcType=VARCHAR}, 
-      #{issuer,jdbcType=VARCHAR}, #{acquirer,jdbcType=VARCHAR}, #{recvInstId,jdbcType=VARCHAR}, 
-      #{ccyConvAmount,jdbcType=DECIMAL}, #{addData3,jdbcType=VARCHAR}, #{addData4,jdbcType=VARCHAR}, 
-      #{addData5,jdbcType=VARCHAR}, #{clearDate,jdbcType=DATE}, #{clearStatus,jdbcType=VARCHAR}, 
-      #{settDate,jdbcType=DATE}, #{reversalStatus,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      is_enable, is_deleted)
+    values (#{id,jdbcType=BIGINT}, #{instId,jdbcType=VARCHAR}, #{agentId,jdbcType=VARCHAR}, 
+      #{settDate,jdbcType=DATE}, #{reconCcy,jdbcType=VARCHAR}, #{collectOrNot,jdbcType=VARCHAR}, 
+      #{totalFeeAmount,jdbcType=DECIMAL}, #{tranCounts,jdbcType=INTEGER}, #{creator,jdbcType=VARCHAR}, 
       #{createDatetime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, #{modifyDatetime,jdbcType=TIMESTAMP}, 
-      #{isEnable,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}, #{acqMsgFlag,jdbcType=VARCHAR}, 
-      #{issMsgFlag,jdbcType=VARCHAR}, #{msgStatus,jdbcType=VARCHAR}, #{panEncrypt,jdbcType=VARCHAR}, 
-      #{respCode,jdbcType=VARCHAR}, #{acqSettCfgId,jdbcType=VARCHAR}, #{issSettCfgId,jdbcType=VARCHAR}, 
-      #{cardBin,jdbcType=VARCHAR}, #{msgRevFlag,jdbcType=VARCHAR})
+      #{isEnable,jdbcType=BIT}, #{isDeleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchFailNonFiDO" >
-    insert into batch_fail_nonfinancial_data
+  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchDisSwFeePostSumDO" >
+    insert into batch_disp_sw_fee_post_sum_data
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="msgType != null" >
-        msg_type,
+      <if test="instId != null" >
+        inst_id,
       </if>
-      <if test="pan != null" >
-        pan,
-      </if>
-      <if test="pcode != null" >
-        pcode,
-      </if>
-      <if test="tranAmount != null" >
-        tran_amount,
-      </if>
-      <if test="reconAmount != null" >
-        recon_amount,
-      </if>
-      <if test="billAmount != null" >
-        bill_amount,
-      </if>
-      <if test="reconRate != null" >
-        recon_rate,
-      </if>
-      <if test="billRate != null" >
-        bill_rate,
-      </if>
-      <if test="stan != null" >
-        stan,
-      </if>
-      <if test="tranDate != null" >
-        tran_date,
-      </if>
-      <if test="tranTime != null" >
-        tran_time,
-      </if>
-      <if test="localTime != null" >
-        local_time,
-      </if>
-      <if test="expireDate != null" >
-        expire_date,
-      </if>
-      <if test="posEntryMode != null" >
-        pos_entry_mode,
-      </if>
-      <if test="posData != null" >
-        pos_data,
-      </if>
-      <if test="posPinCap != null" >
-        pos_pin_cap,
-      </if>
-      <if test="cardSeq != null" >
-        card_seq,
-      </if>
-      <if test="funcCode != null" >
-        func_code,
-      </if>
-      <if test="reasonCode != null" >
-        reason_code,
-      </if>
-      <if test="mcc != null" >
-        mcc,
-      </if>
-      <if test="origAmount != null" >
-        orig_amount,
-      </if>
-      <if test="acqReferData != null" >
-        acq_refer_data,
-      </if>
-      <if test="acqInstId != null" >
-        acq_inst_id,
-      </if>
-      <if test="forInstId != null" >
-        for_inst_id,
-      </if>
-      <if test="referNo != null" >
-        refer_no,
-      </if>
-      <if test="approveCode != null" >
-        approve_code,
-      </if>
-      <if test="serviceCode != null" >
-        service_code,
-      </if>
-      <if test="terminalId != null" >
-        terminal_id,
-      </if>
-      <if test="acceptorId != null" >
-        acceptor_id,
-      </if>
-      <if test="acceporName != null" >
-        accepor_name,
-      </if>
-      <if test="addData1 != null" >
-        add_data_1,
-      </if>
-      <if test="tranCcy != null" >
-        tran_ccy,
-      </if>
-      <if test="reconCcy != null" >
-        recon_ccy,
-      </if>
-      <if test="billCcy != null" >
-        bill_ccy,
-      </if>
-      <if test="addAmount != null" >
-        add_amount,
-      </if>
-      <if test="iccRelaData != null" >
-        icc_rela_data,
-      </if>
-      <if test="addData2 != null" >
-        add_data_2,
-      </if>
-      <if test="tranLifeCycleId != null" >
-        tran_life_cycle_id,
-      </if>
-      <if test="issuer != null" >
-        issuer,
-      </if>
-      <if test="acquirer != null" >
-        acquirer,
-      </if>
-      <if test="recvInstId != null" >
-        recv_inst_id,
-      </if>
-      <if test="ccyConvAmount != null" >
-        ccy_conv_amount,
-      </if>
-      <if test="addData3 != null" >
-        add_data_3,
-      </if>
-      <if test="addData4 != null" >
-        add_data_4,
-      </if>
-      <if test="addData5 != null" >
-        add_data_5,
-      </if>
-      <if test="clearDate != null" >
-        clear_date,
-      </if>
-      <if test="clearStatus != null" >
-        clear_status,
+      <if test="agentId != null" >
+        agent_id,
       </if>
       <if test="settDate != null" >
         sett_date,
       </if>
-      <if test="reversalStatus != null" >
-        reversal_status,
+      <if test="reconCcy != null" >
+        recon_ccy,
+      </if>
+      <if test="collectOrNot != null" >
+        collect_or_not,
+      </if>
+      <if test="totalFeeAmount != null" >
+        total_fee_amount,
+      </if>
+      <if test="tranCounts != null" >
+        tran_counts,
       </if>
       <if test="creator != null" >
         creator,
@@ -307,184 +88,31 @@
       <if test="isDeleted != null" >
         is_deleted,
       </if>
-      <if test="acqMsgFlag != null" >
-        acq_msg_flag,
-      </if>
-      <if test="issMsgFlag != null" >
-        iss_msg_flag,
-      </if>
-      <if test="msgStatus != null" >
-        msg_status,
-      </if>
-      <if test="panEncrypt != null" >
-        pan_encrypt,
-      </if>
-      <if test="respCode != null" >
-        resp_code,
-      </if>
-      <if test="acqSettCfgId != null" >
-        acq_sett_cfg_id,
-      </if>
-      <if test="issSettCfgId != null" >
-        iss_sett_cfg_id,
-      </if>
-      <if test="cardBin != null" >
-        card_bin,
-      </if>
-      <if test="msgRevFlag != null" >
-        msg_rev_flag,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="msgType != null" >
-        #{msgType,jdbcType=VARCHAR},
+      <if test="instId != null" >
+        #{instId,jdbcType=VARCHAR},
       </if>
-      <if test="pan != null" >
-        #{pan,jdbcType=VARCHAR},
-      </if>
-      <if test="pcode != null" >
-        #{pcode,jdbcType=VARCHAR},
-      </if>
-      <if test="tranAmount != null" >
-        #{tranAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="reconAmount != null" >
-        #{reconAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="billAmount != null" >
-        #{billAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="reconRate != null" >
-        #{reconRate,jdbcType=DECIMAL},
-      </if>
-      <if test="billRate != null" >
-        #{billRate,jdbcType=DECIMAL},
-      </if>
-      <if test="stan != null" >
-        #{stan,jdbcType=VARCHAR},
-      </if>
-      <if test="tranDate != null" >
-        #{tranDate,jdbcType=DATE},
-      </if>
-      <if test="tranTime != null" >
-        #{tranTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="localTime != null" >
-        #{localTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="expireDate != null" >
-        #{expireDate,jdbcType=VARCHAR},
-      </if>
-      <if test="posEntryMode != null" >
-        #{posEntryMode,jdbcType=VARCHAR},
-      </if>
-      <if test="posData != null" >
-        #{posData,jdbcType=VARCHAR},
-      </if>
-      <if test="posPinCap != null" >
-        #{posPinCap,jdbcType=VARCHAR},
-      </if>
-      <if test="cardSeq != null" >
-        #{cardSeq,jdbcType=VARCHAR},
-      </if>
-      <if test="funcCode != null" >
-        #{funcCode,jdbcType=VARCHAR},
-      </if>
-      <if test="reasonCode != null" >
-        #{reasonCode,jdbcType=VARCHAR},
-      </if>
-      <if test="mcc != null" >
-        #{mcc,jdbcType=VARCHAR},
-      </if>
-      <if test="origAmount != null" >
-        #{origAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="acqReferData != null" >
-        #{acqReferData,jdbcType=VARCHAR},
-      </if>
-      <if test="acqInstId != null" >
-        #{acqInstId,jdbcType=VARCHAR},
-      </if>
-      <if test="forInstId != null" >
-        #{forInstId,jdbcType=VARCHAR},
-      </if>
-      <if test="referNo != null" >
-        #{referNo,jdbcType=VARCHAR},
-      </if>
-      <if test="approveCode != null" >
-        #{approveCode,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceCode != null" >
-        #{serviceCode,jdbcType=VARCHAR},
-      </if>
-      <if test="terminalId != null" >
-        #{terminalId,jdbcType=VARCHAR},
-      </if>
-      <if test="acceptorId != null" >
-        #{acceptorId,jdbcType=VARCHAR},
-      </if>
-      <if test="acceporName != null" >
-        #{acceporName,jdbcType=VARCHAR},
-      </if>
-      <if test="addData1 != null" >
-        #{addData1,jdbcType=VARCHAR},
-      </if>
-      <if test="tranCcy != null" >
-        #{tranCcy,jdbcType=VARCHAR},
-      </if>
-      <if test="reconCcy != null" >
-        #{reconCcy,jdbcType=VARCHAR},
-      </if>
-      <if test="billCcy != null" >
-        #{billCcy,jdbcType=VARCHAR},
-      </if>
-      <if test="addAmount != null" >
-        #{addAmount,jdbcType=VARCHAR},
-      </if>
-      <if test="iccRelaData != null" >
-        #{iccRelaData,jdbcType=VARCHAR},
-      </if>
-      <if test="addData2 != null" >
-        #{addData2,jdbcType=VARCHAR},
-      </if>
-      <if test="tranLifeCycleId != null" >
-        #{tranLifeCycleId,jdbcType=VARCHAR},
-      </if>
-      <if test="issuer != null" >
-        #{issuer,jdbcType=VARCHAR},
-      </if>
-      <if test="acquirer != null" >
-        #{acquirer,jdbcType=VARCHAR},
-      </if>
-      <if test="recvInstId != null" >
-        #{recvInstId,jdbcType=VARCHAR},
-      </if>
-      <if test="ccyConvAmount != null" >
-        #{ccyConvAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="addData3 != null" >
-        #{addData3,jdbcType=VARCHAR},
-      </if>
-      <if test="addData4 != null" >
-        #{addData4,jdbcType=VARCHAR},
-      </if>
-      <if test="addData5 != null" >
-        #{addData5,jdbcType=VARCHAR},
-      </if>
-      <if test="clearDate != null" >
-        #{clearDate,jdbcType=DATE},
-      </if>
-      <if test="clearStatus != null" >
-        #{clearStatus,jdbcType=VARCHAR},
+      <if test="agentId != null" >
+        #{agentId,jdbcType=VARCHAR},
       </if>
       <if test="settDate != null" >
         #{settDate,jdbcType=DATE},
       </if>
-      <if test="reversalStatus != null" >
-        #{reversalStatus,jdbcType=VARCHAR},
+      <if test="reconCcy != null" >
+        #{reconCcy,jdbcType=VARCHAR},
+      </if>
+      <if test="collectOrNot != null" >
+        #{collectOrNot,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFeeAmount != null" >
+        #{totalFeeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="tranCounts != null" >
+        #{tranCounts,jdbcType=INTEGER},
       </if>
       <if test="creator != null" >
         #{creator,jdbcType=VARCHAR},
@@ -504,184 +132,31 @@
       <if test="isDeleted != null" >
         #{isDeleted,jdbcType=BIT},
       </if>
-      <if test="acqMsgFlag != null" >
-        #{acqMsgFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="issMsgFlag != null" >
-        #{issMsgFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="msgStatus != null" >
-        #{msgStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="panEncrypt != null" >
-        #{panEncrypt,jdbcType=VARCHAR},
-      </if>
-      <if test="respCode != null" >
-        #{respCode,jdbcType=VARCHAR},
-      </if>
-      <if test="acqSettCfgId != null" >
-        #{acqSettCfgId,jdbcType=VARCHAR},
-      </if>
-      <if test="issSettCfgId != null" >
-        #{issSettCfgId,jdbcType=VARCHAR},
-      </if>
-      <if test="cardBin != null" >
-        #{cardBin,jdbcType=VARCHAR},
-      </if>
-      <if test="msgRevFlag != null" >
-        #{msgRevFlag,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchFailNonFiDO" >
-    update batch_fail_nonfinancial_data
+  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchDisSwFeePostSumDO" >
+    update batch_disp_sw_fee_post_sum_data
     <set >
-      <if test="msgType != null" >
-        msg_type = #{msgType,jdbcType=VARCHAR},
+      <if test="instId != null" >
+        inst_id = #{instId,jdbcType=VARCHAR},
       </if>
-      <if test="pan != null" >
-        pan = #{pan,jdbcType=VARCHAR},
-      </if>
-      <if test="pcode != null" >
-        pcode = #{pcode,jdbcType=VARCHAR},
-      </if>
-      <if test="tranAmount != null" >
-        tran_amount = #{tranAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="reconAmount != null" >
-        recon_amount = #{reconAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="billAmount != null" >
-        bill_amount = #{billAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="reconRate != null" >
-        recon_rate = #{reconRate,jdbcType=DECIMAL},
-      </if>
-      <if test="billRate != null" >
-        bill_rate = #{billRate,jdbcType=DECIMAL},
-      </if>
-      <if test="stan != null" >
-        stan = #{stan,jdbcType=VARCHAR},
-      </if>
-      <if test="tranDate != null" >
-        tran_date = #{tranDate,jdbcType=DATE},
-      </if>
-      <if test="tranTime != null" >
-        tran_time = #{tranTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="localTime != null" >
-        local_time = #{localTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="expireDate != null" >
-        expire_date = #{expireDate,jdbcType=VARCHAR},
-      </if>
-      <if test="posEntryMode != null" >
-        pos_entry_mode = #{posEntryMode,jdbcType=VARCHAR},
-      </if>
-      <if test="posData != null" >
-        pos_data = #{posData,jdbcType=VARCHAR},
-      </if>
-      <if test="posPinCap != null" >
-        pos_pin_cap = #{posPinCap,jdbcType=VARCHAR},
-      </if>
-      <if test="cardSeq != null" >
-        card_seq = #{cardSeq,jdbcType=VARCHAR},
-      </if>
-      <if test="funcCode != null" >
-        func_code = #{funcCode,jdbcType=VARCHAR},
-      </if>
-      <if test="reasonCode != null" >
-        reason_code = #{reasonCode,jdbcType=VARCHAR},
-      </if>
-      <if test="mcc != null" >
-        mcc = #{mcc,jdbcType=VARCHAR},
-      </if>
-      <if test="origAmount != null" >
-        orig_amount = #{origAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="acqReferData != null" >
-        acq_refer_data = #{acqReferData,jdbcType=VARCHAR},
-      </if>
-      <if test="acqInstId != null" >
-        acq_inst_id = #{acqInstId,jdbcType=VARCHAR},
-      </if>
-      <if test="forInstId != null" >
-        for_inst_id = #{forInstId,jdbcType=VARCHAR},
-      </if>
-      <if test="referNo != null" >
-        refer_no = #{referNo,jdbcType=VARCHAR},
-      </if>
-      <if test="approveCode != null" >
-        approve_code = #{approveCode,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceCode != null" >
-        service_code = #{serviceCode,jdbcType=VARCHAR},
-      </if>
-      <if test="terminalId != null" >
-        terminal_id = #{terminalId,jdbcType=VARCHAR},
-      </if>
-      <if test="acceptorId != null" >
-        acceptor_id = #{acceptorId,jdbcType=VARCHAR},
-      </if>
-      <if test="acceporName != null" >
-        accepor_name = #{acceporName,jdbcType=VARCHAR},
-      </if>
-      <if test="addData1 != null" >
-        add_data_1 = #{addData1,jdbcType=VARCHAR},
-      </if>
-      <if test="tranCcy != null" >
-        tran_ccy = #{tranCcy,jdbcType=VARCHAR},
-      </if>
-      <if test="reconCcy != null" >
-        recon_ccy = #{reconCcy,jdbcType=VARCHAR},
-      </if>
-      <if test="billCcy != null" >
-        bill_ccy = #{billCcy,jdbcType=VARCHAR},
-      </if>
-      <if test="addAmount != null" >
-        add_amount = #{addAmount,jdbcType=VARCHAR},
-      </if>
-      <if test="iccRelaData != null" >
-        icc_rela_data = #{iccRelaData,jdbcType=VARCHAR},
-      </if>
-      <if test="addData2 != null" >
-        add_data_2 = #{addData2,jdbcType=VARCHAR},
-      </if>
-      <if test="tranLifeCycleId != null" >
-        tran_life_cycle_id = #{tranLifeCycleId,jdbcType=VARCHAR},
-      </if>
-      <if test="issuer != null" >
-        issuer = #{issuer,jdbcType=VARCHAR},
-      </if>
-      <if test="acquirer != null" >
-        acquirer = #{acquirer,jdbcType=VARCHAR},
-      </if>
-      <if test="recvInstId != null" >
-        recv_inst_id = #{recvInstId,jdbcType=VARCHAR},
-      </if>
-      <if test="ccyConvAmount != null" >
-        ccy_conv_amount = #{ccyConvAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="addData3 != null" >
-        add_data_3 = #{addData3,jdbcType=VARCHAR},
-      </if>
-      <if test="addData4 != null" >
-        add_data_4 = #{addData4,jdbcType=VARCHAR},
-      </if>
-      <if test="addData5 != null" >
-        add_data_5 = #{addData5,jdbcType=VARCHAR},
-      </if>
-      <if test="clearDate != null" >
-        clear_date = #{clearDate,jdbcType=DATE},
-      </if>
-      <if test="clearStatus != null" >
-        clear_status = #{clearStatus,jdbcType=VARCHAR},
+      <if test="agentId != null" >
+        agent_id = #{agentId,jdbcType=VARCHAR},
       </if>
       <if test="settDate != null" >
         sett_date = #{settDate,jdbcType=DATE},
       </if>
-      <if test="reversalStatus != null" >
-        reversal_status = #{reversalStatus,jdbcType=VARCHAR},
+      <if test="reconCcy != null" >
+        recon_ccy = #{reconCcy,jdbcType=VARCHAR},
+      </if>
+      <if test="collectOrNot != null" >
+        collect_or_not = #{collectOrNot,jdbcType=VARCHAR},
+      </if>
+      <if test="totalFeeAmount != null" >
+        total_fee_amount = #{totalFeeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="tranCounts != null" >
+        tran_counts = #{tranCounts,jdbcType=INTEGER},
       </if>
       <if test="creator != null" >
         creator = #{creator,jdbcType=VARCHAR},
@@ -701,102 +176,24 @@
       <if test="isDeleted != null" >
         is_deleted = #{isDeleted,jdbcType=BIT},
       </if>
-      <if test="acqMsgFlag != null" >
-        acq_msg_flag = #{acqMsgFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="issMsgFlag != null" >
-        iss_msg_flag = #{issMsgFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="msgStatus != null" >
-        msg_status = #{msgStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="panEncrypt != null" >
-        pan_encrypt = #{panEncrypt,jdbcType=VARCHAR},
-      </if>
-      <if test="respCode != null" >
-        resp_code = #{respCode,jdbcType=VARCHAR},
-      </if>
-      <if test="acqSettCfgId != null" >
-        acq_sett_cfg_id = #{acqSettCfgId,jdbcType=VARCHAR},
-      </if>
-      <if test="issSettCfgId != null" >
-        iss_sett_cfg_id = #{issSettCfgId,jdbcType=VARCHAR},
-      </if>
-      <if test="cardBin != null" >
-        card_bin = #{cardBin,jdbcType=VARCHAR},
-      </if>
-      <if test="msgRevFlag != null" >
-        msg_rev_flag = #{msgRevFlag,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchFailNonFiDO" >
-    update batch_fail_nonfinancial_data
-    set msg_type = #{msgType,jdbcType=VARCHAR},
-      pan = #{pan,jdbcType=VARCHAR},
-      pcode = #{pcode,jdbcType=VARCHAR},
-      tran_amount = #{tranAmount,jdbcType=DECIMAL},
-      recon_amount = #{reconAmount,jdbcType=DECIMAL},
-      bill_amount = #{billAmount,jdbcType=DECIMAL},
-      recon_rate = #{reconRate,jdbcType=DECIMAL},
-      bill_rate = #{billRate,jdbcType=DECIMAL},
-      stan = #{stan,jdbcType=VARCHAR},
-      tran_date = #{tranDate,jdbcType=DATE},
-      tran_time = #{tranTime,jdbcType=TIMESTAMP},
-      local_time = #{localTime,jdbcType=TIMESTAMP},
-      expire_date = #{expireDate,jdbcType=VARCHAR},
-      pos_entry_mode = #{posEntryMode,jdbcType=VARCHAR},
-      pos_data = #{posData,jdbcType=VARCHAR},
-      pos_pin_cap = #{posPinCap,jdbcType=VARCHAR},
-      card_seq = #{cardSeq,jdbcType=VARCHAR},
-      func_code = #{funcCode,jdbcType=VARCHAR},
-      reason_code = #{reasonCode,jdbcType=VARCHAR},
-      mcc = #{mcc,jdbcType=VARCHAR},
-      orig_amount = #{origAmount,jdbcType=DECIMAL},
-      acq_refer_data = #{acqReferData,jdbcType=VARCHAR},
-      acq_inst_id = #{acqInstId,jdbcType=VARCHAR},
-      for_inst_id = #{forInstId,jdbcType=VARCHAR},
-      refer_no = #{referNo,jdbcType=VARCHAR},
-      approve_code = #{approveCode,jdbcType=VARCHAR},
-      service_code = #{serviceCode,jdbcType=VARCHAR},
-      terminal_id = #{terminalId,jdbcType=VARCHAR},
-      acceptor_id = #{acceptorId,jdbcType=VARCHAR},
-      accepor_name = #{acceporName,jdbcType=VARCHAR},
-      add_data_1 = #{addData1,jdbcType=VARCHAR},
-      tran_ccy = #{tranCcy,jdbcType=VARCHAR},
-      recon_ccy = #{reconCcy,jdbcType=VARCHAR},
-      bill_ccy = #{billCcy,jdbcType=VARCHAR},
-      add_amount = #{addAmount,jdbcType=VARCHAR},
-      icc_rela_data = #{iccRelaData,jdbcType=VARCHAR},
-      add_data_2 = #{addData2,jdbcType=VARCHAR},
-      tran_life_cycle_id = #{tranLifeCycleId,jdbcType=VARCHAR},
-      issuer = #{issuer,jdbcType=VARCHAR},
-      acquirer = #{acquirer,jdbcType=VARCHAR},
-      recv_inst_id = #{recvInstId,jdbcType=VARCHAR},
-      ccy_conv_amount = #{ccyConvAmount,jdbcType=DECIMAL},
-      add_data_3 = #{addData3,jdbcType=VARCHAR},
-      add_data_4 = #{addData4,jdbcType=VARCHAR},
-      add_data_5 = #{addData5,jdbcType=VARCHAR},
-      clear_date = #{clearDate,jdbcType=DATE},
-      clear_status = #{clearStatus,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchDisSwFeePostSumDO" >
+    update batch_disp_sw_fee_post_sum_data
+    set inst_id = #{instId,jdbcType=VARCHAR},
+      agent_id = #{agentId,jdbcType=VARCHAR},
       sett_date = #{settDate,jdbcType=DATE},
-      reversal_status = #{reversalStatus,jdbcType=VARCHAR},
+      recon_ccy = #{reconCcy,jdbcType=VARCHAR},
+      collect_or_not = #{collectOrNot,jdbcType=VARCHAR},
+      total_fee_amount = #{totalFeeAmount,jdbcType=DECIMAL},
+      tran_counts = #{tranCounts,jdbcType=INTEGER},
       creator = #{creator,jdbcType=VARCHAR},
       create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
       modifier = #{modifier,jdbcType=VARCHAR},
       modify_datetime = #{modifyDatetime,jdbcType=TIMESTAMP},
       is_enable = #{isEnable,jdbcType=BIT},
-      is_deleted = #{isDeleted,jdbcType=BIT},
-      acq_msg_flag = #{acqMsgFlag,jdbcType=VARCHAR},
-      iss_msg_flag = #{issMsgFlag,jdbcType=VARCHAR},
-      msg_status = #{msgStatus,jdbcType=VARCHAR},
-      pan_encrypt = #{panEncrypt,jdbcType=VARCHAR},
-      resp_code = #{respCode,jdbcType=VARCHAR},
-      acq_sett_cfg_id = #{acqSettCfgId,jdbcType=VARCHAR},
-      iss_sett_cfg_id = #{issSettCfgId,jdbcType=VARCHAR},
-      card_bin = #{cardBin,jdbcType=VARCHAR},
-      msg_rev_flag = #{msgRevFlag,jdbcType=VARCHAR}
+      is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
