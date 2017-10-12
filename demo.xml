@@ -1,203 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.eigpay.feesnode.infra.dao.BatchDisPreProcessedMsgDOMapper" >
-  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchDisPreProcessedMsgDO" >
+<mapper namespace="com.eigpay.feesnode.infra.dao.BatchDisSettPostDOMapper" >
+  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchDisSettPostDO" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="msg_type" property="msgType" jdbcType="VARCHAR" />
-    <result column="tran_set" property="tranSet" jdbcType="VARCHAR" />
-    <result column="pcode" property="pcode" jdbcType="VARCHAR" />
-    <result column="func_code" property="funcCode" jdbcType="VARCHAR" />
-    <result column="mcc" property="mcc" jdbcType="VARCHAR" />
-    <result column="mcc_group" property="mccGroup" jdbcType="VARCHAR" />
-    <result column="card_prd" property="cardPrd" jdbcType="VARCHAR" />
-    <result column="disp_trace_no" property="dispTraceNo" jdbcType="VARCHAR" />
-    <result column="disp_amount" property="dispAmount" jdbcType="DECIMAL" />
-    <result column="disp_ccy" property="dispCcy" jdbcType="VARCHAR" />
-    <result column="disp_dirc" property="dispDirc" jdbcType="VARCHAR" />
-    <result column="dis_send_ica" property="disSendIca" jdbcType="VARCHAR" />
-    <result column="dis_recv_ica" property="disRecvIca" jdbcType="VARCHAR" />
-    <result column="orig_amount" property="origAmount" jdbcType="DECIMAL" />
-    <result column="orig_acquirer" property="origAcquirer" jdbcType="VARCHAR" />
-    <result column="orig_issuer" property="origIssuer" jdbcType="VARCHAR" />
-    <result column="orig_tran_life_cycle_id" property="origTranLifeCycleId" jdbcType="VARCHAR" />
-    <result column="local_time" property="localTime" jdbcType="TIMESTAMP" />
-    <result column="clear_date" property="clearDate" jdbcType="DATE" />
-    <result column="clear_status" property="clearStatus" jdbcType="VARCHAR" />
-    <result column="acq_msg_flag" property="acqMsgFlag" jdbcType="VARCHAR" />
-    <result column="iss_msg_flag" property="issMsgFlag" jdbcType="VARCHAR" />
-    <result column="acq_sw_fee_amount" property="acqSwFeeAmount" jdbcType="DECIMAL" />
-    <result column="acq_sw_fee_tp" property="acqSwFeeTp" jdbcType="VARCHAR" />
-    <result column="acq_sw_fee_code" property="acqSwFeeCode" jdbcType="VARCHAR" />
-    <result column="iss_sw_fee_amount" property="issSwFeeAmount" jdbcType="DECIMAL" />
-    <result column="iss_sw_fee_tp" property="issSwFeeTp" jdbcType="VARCHAR" />
-    <result column="iss_sw_fee_code" property="issSwFeeCode" jdbcType="VARCHAR" />
-    <result column="inter_fee_amount" property="interFeeAmount" jdbcType="DECIMAL" />
-    <result column="inter_fee_direc" property="interFeeDirec" jdbcType="VARCHAR" />
-    <result column="inter_fee_tp" property="interFeeTp" jdbcType="VARCHAR" />
-    <result column="inter_fee_code" property="interFeeCode" jdbcType="VARCHAR" />
+    <result column="inst_id" property="instId" jdbcType="VARCHAR" />
+    <result column="agent_id" property="agentId" jdbcType="VARCHAR" />
+    <result column="sett_date" property="settDate" jdbcType="DATE" />
+    <result column="acq_dis_amount" property="acqDisAmount" jdbcType="DECIMAL" />
+    <result column="acq_dis_count" property="acqDisCount" jdbcType="INTEGER" />
+    <result column="iss_dis_amount" property="issDisAmount" jdbcType="DECIMAL" />
+    <result column="iss_dis_count" property="issDisCount" jdbcType="INTEGER" />
+    <result column="recon_ccy" property="reconCcy" jdbcType="VARCHAR" />
+    <result column="net_amount" property="netAmount" jdbcType="DECIMAL" />
     <result column="creator" property="creator" jdbcType="VARCHAR" />
     <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
     <result column="modifier" property="modifier" jdbcType="VARCHAR" />
     <result column="modify_datetime" property="modifyDatetime" jdbcType="TIMESTAMP" />
     <result column="is_enable" property="isEnable" jdbcType="BIT" />
     <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
-    <result column="pan" property="pan" jdbcType="VARCHAR" />
-    <result column="pan_encrypt" property="panEncrypt" jdbcType="VARCHAR" />
-    <result column="acq_sett_cfg_id" property="acqSettCfgId" jdbcType="VARCHAR" />
-    <result column="iss_sett_cfg_id" property="issSettCfgId" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, msg_type, tran_set, pcode, func_code, mcc, mcc_group, card_prd, disp_trace_no, 
-    disp_amount, disp_ccy, disp_dirc, dis_send_ica, dis_recv_ica, orig_amount, orig_acquirer, 
-    orig_issuer, orig_tran_life_cycle_id, local_time, clear_date, clear_status, acq_msg_flag, 
-    iss_msg_flag, acq_sw_fee_amount, acq_sw_fee_tp, acq_sw_fee_code, iss_sw_fee_amount, 
-    iss_sw_fee_tp, iss_sw_fee_code, inter_fee_amount, inter_fee_direc, inter_fee_tp, 
-    inter_fee_code, creator, create_datetime, modifier, modify_datetime, is_enable, is_deleted, 
-    pan, pan_encrypt, acq_sett_cfg_id, iss_sett_cfg_id
+    id, inst_id, agent_id, sett_date, acq_dis_amount, acq_dis_count, iss_dis_amount, 
+    iss_dis_count, recon_ccy, net_amount, creator, create_datetime, modifier, modify_datetime, 
+    is_enable, is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from batch_pre_processed_dis_message
+    from batch_disp_sett_post_data
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from batch_pre_processed_dis_message
+    delete from batch_disp_sett_post_data
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchDisPreProcessedMsgDO" >
-    insert into batch_pre_processed_dis_message (id, msg_type, tran_set, 
-      pcode, func_code, mcc, 
-      mcc_group, card_prd, disp_trace_no, 
-      disp_amount, disp_ccy, disp_dirc, 
-      dis_send_ica, dis_recv_ica, orig_amount, 
-      orig_acquirer, orig_issuer, orig_tran_life_cycle_id, 
-      local_time, clear_date, clear_status, 
-      acq_msg_flag, iss_msg_flag, acq_sw_fee_amount, 
-      acq_sw_fee_tp, acq_sw_fee_code, iss_sw_fee_amount, 
-      iss_sw_fee_tp, iss_sw_fee_code, inter_fee_amount, 
-      inter_fee_direc, inter_fee_tp, inter_fee_code, 
-      creator, create_datetime, modifier, 
-      modify_datetime, is_enable, is_deleted, 
-      pan, pan_encrypt, acq_sett_cfg_id, 
-      iss_sett_cfg_id)
-    values (#{id,jdbcType=BIGINT}, #{msgType,jdbcType=VARCHAR}, #{tranSet,jdbcType=VARCHAR}, 
-      #{pcode,jdbcType=VARCHAR}, #{funcCode,jdbcType=VARCHAR}, #{mcc,jdbcType=VARCHAR}, 
-      #{mccGroup,jdbcType=VARCHAR}, #{cardPrd,jdbcType=VARCHAR}, #{dispTraceNo,jdbcType=VARCHAR}, 
-      #{dispAmount,jdbcType=DECIMAL}, #{dispCcy,jdbcType=VARCHAR}, #{dispDirc,jdbcType=VARCHAR}, 
-      #{disSendIca,jdbcType=VARCHAR}, #{disRecvIca,jdbcType=VARCHAR}, #{origAmount,jdbcType=DECIMAL}, 
-      #{origAcquirer,jdbcType=VARCHAR}, #{origIssuer,jdbcType=VARCHAR}, #{origTranLifeCycleId,jdbcType=VARCHAR}, 
-      #{localTime,jdbcType=TIMESTAMP}, #{clearDate,jdbcType=DATE}, #{clearStatus,jdbcType=VARCHAR}, 
-      #{acqMsgFlag,jdbcType=VARCHAR}, #{issMsgFlag,jdbcType=VARCHAR}, #{acqSwFeeAmount,jdbcType=DECIMAL}, 
-      #{acqSwFeeTp,jdbcType=VARCHAR}, #{acqSwFeeCode,jdbcType=VARCHAR}, #{issSwFeeAmount,jdbcType=DECIMAL}, 
-      #{issSwFeeTp,jdbcType=VARCHAR}, #{issSwFeeCode,jdbcType=VARCHAR}, #{interFeeAmount,jdbcType=DECIMAL}, 
-      #{interFeeDirec,jdbcType=VARCHAR}, #{interFeeTp,jdbcType=VARCHAR}, #{interFeeCode,jdbcType=VARCHAR}, 
-      #{creator,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, 
-      #{modifyDatetime,jdbcType=TIMESTAMP}, #{isEnable,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}, 
-      #{pan,jdbcType=VARCHAR}, #{panEncrypt,jdbcType=VARCHAR}, #{acqSettCfgId,jdbcType=VARCHAR}, 
-      #{issSettCfgId,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchDisSettPostDO" >
+    insert into batch_disp_sett_post_data (id, inst_id, agent_id, 
+      sett_date, acq_dis_amount, acq_dis_count, 
+      iss_dis_amount, iss_dis_count, recon_ccy, 
+      net_amount, creator, create_datetime, 
+      modifier, modify_datetime, is_enable, 
+      is_deleted)
+    values (#{id,jdbcType=BIGINT}, #{instId,jdbcType=VARCHAR}, #{agentId,jdbcType=VARCHAR}, 
+      #{settDate,jdbcType=DATE}, #{acqDisAmount,jdbcType=DECIMAL}, #{acqDisCount,jdbcType=INTEGER}, 
+      #{issDisAmount,jdbcType=DECIMAL}, #{issDisCount,jdbcType=INTEGER}, #{reconCcy,jdbcType=VARCHAR}, 
+      #{netAmount,jdbcType=DECIMAL}, #{creator,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=VARCHAR}, #{modifyDatetime,jdbcType=TIMESTAMP}, #{isEnable,jdbcType=BIT}, 
+      #{isDeleted,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchDisPreProcessedMsgDO" >
-    insert into batch_pre_processed_dis_message
+  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchDisSettPostDO" >
+    insert into batch_disp_sett_post_data
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="msgType != null" >
-        msg_type,
+      <if test="instId != null" >
+        inst_id,
       </if>
-      <if test="tranSet != null" >
-        tran_set,
+      <if test="agentId != null" >
+        agent_id,
       </if>
-      <if test="pcode != null" >
-        pcode,
+      <if test="settDate != null" >
+        sett_date,
       </if>
-      <if test="funcCode != null" >
-        func_code,
+      <if test="acqDisAmount != null" >
+        acq_dis_amount,
       </if>
-      <if test="mcc != null" >
-        mcc,
+      <if test="acqDisCount != null" >
+        acq_dis_count,
       </if>
-      <if test="mccGroup != null" >
-        mcc_group,
+      <if test="issDisAmount != null" >
+        iss_dis_amount,
       </if>
-      <if test="cardPrd != null" >
-        card_prd,
+      <if test="issDisCount != null" >
+        iss_dis_count,
       </if>
-      <if test="dispTraceNo != null" >
-        disp_trace_no,
+      <if test="reconCcy != null" >
+        recon_ccy,
       </if>
-      <if test="dispAmount != null" >
-        disp_amount,
-      </if>
-      <if test="dispCcy != null" >
-        disp_ccy,
-      </if>
-      <if test="dispDirc != null" >
-        disp_dirc,
-      </if>
-      <if test="disSendIca != null" >
-        dis_send_ica,
-      </if>
-      <if test="disRecvIca != null" >
-        dis_recv_ica,
-      </if>
-      <if test="origAmount != null" >
-        orig_amount,
-      </if>
-      <if test="origAcquirer != null" >
-        orig_acquirer,
-      </if>
-      <if test="origIssuer != null" >
-        orig_issuer,
-      </if>
-      <if test="origTranLifeCycleId != null" >
-        orig_tran_life_cycle_id,
-      </if>
-      <if test="localTime != null" >
-        local_time,
-      </if>
-      <if test="clearDate != null" >
-        clear_date,
-      </if>
-      <if test="clearStatus != null" >
-        clear_status,
-      </if>
-      <if test="acqMsgFlag != null" >
-        acq_msg_flag,
-      </if>
-      <if test="issMsgFlag != null" >
-        iss_msg_flag,
-      </if>
-      <if test="acqSwFeeAmount != null" >
-        acq_sw_fee_amount,
-      </if>
-      <if test="acqSwFeeTp != null" >
-        acq_sw_fee_tp,
-      </if>
-      <if test="acqSwFeeCode != null" >
-        acq_sw_fee_code,
-      </if>
-      <if test="issSwFeeAmount != null" >
-        iss_sw_fee_amount,
-      </if>
-      <if test="issSwFeeTp != null" >
-        iss_sw_fee_tp,
-      </if>
-      <if test="issSwFeeCode != null" >
-        iss_sw_fee_code,
-      </if>
-      <if test="interFeeAmount != null" >
-        inter_fee_amount,
-      </if>
-      <if test="interFeeDirec != null" >
-        inter_fee_direc,
-      </if>
-      <if test="interFeeTp != null" >
-        inter_fee_tp,
-      </if>
-      <if test="interFeeCode != null" >
-        inter_fee_code,
+      <if test="netAmount != null" >
+        net_amount,
       </if>
       <if test="creator != null" >
         creator,
@@ -217,118 +99,37 @@
       <if test="isDeleted != null" >
         is_deleted,
       </if>
-      <if test="pan != null" >
-        pan,
-      </if>
-      <if test="panEncrypt != null" >
-        pan_encrypt,
-      </if>
-      <if test="acqSettCfgId != null" >
-        acq_sett_cfg_id,
-      </if>
-      <if test="issSettCfgId != null" >
-        iss_sett_cfg_id,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="msgType != null" >
-        #{msgType,jdbcType=VARCHAR},
+      <if test="instId != null" >
+        #{instId,jdbcType=VARCHAR},
       </if>
-      <if test="tranSet != null" >
-        #{tranSet,jdbcType=VARCHAR},
+      <if test="agentId != null" >
+        #{agentId,jdbcType=VARCHAR},
       </if>
-      <if test="pcode != null" >
-        #{pcode,jdbcType=VARCHAR},
+      <if test="settDate != null" >
+        #{settDate,jdbcType=DATE},
       </if>
-      <if test="funcCode != null" >
-        #{funcCode,jdbcType=VARCHAR},
+      <if test="acqDisAmount != null" >
+        #{acqDisAmount,jdbcType=DECIMAL},
       </if>
-      <if test="mcc != null" >
-        #{mcc,jdbcType=VARCHAR},
+      <if test="acqDisCount != null" >
+        #{acqDisCount,jdbcType=INTEGER},
       </if>
-      <if test="mccGroup != null" >
-        #{mccGroup,jdbcType=VARCHAR},
+      <if test="issDisAmount != null" >
+        #{issDisAmount,jdbcType=DECIMAL},
       </if>
-      <if test="cardPrd != null" >
-        #{cardPrd,jdbcType=VARCHAR},
+      <if test="issDisCount != null" >
+        #{issDisCount,jdbcType=INTEGER},
       </if>
-      <if test="dispTraceNo != null" >
-        #{dispTraceNo,jdbcType=VARCHAR},
+      <if test="reconCcy != null" >
+        #{reconCcy,jdbcType=VARCHAR},
       </if>
-      <if test="dispAmount != null" >
-        #{dispAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="dispCcy != null" >
-        #{dispCcy,jdbcType=VARCHAR},
-      </if>
-      <if test="dispDirc != null" >
-        #{dispDirc,jdbcType=VARCHAR},
-      </if>
-      <if test="disSendIca != null" >
-        #{disSendIca,jdbcType=VARCHAR},
-      </if>
-      <if test="disRecvIca != null" >
-        #{disRecvIca,jdbcType=VARCHAR},
-      </if>
-      <if test="origAmount != null" >
-        #{origAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="origAcquirer != null" >
-        #{origAcquirer,jdbcType=VARCHAR},
-      </if>
-      <if test="origIssuer != null" >
-        #{origIssuer,jdbcType=VARCHAR},
-      </if>
-      <if test="origTranLifeCycleId != null" >
-        #{origTranLifeCycleId,jdbcType=VARCHAR},
-      </if>
-      <if test="localTime != null" >
-        #{localTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="clearDate != null" >
-        #{clearDate,jdbcType=DATE},
-      </if>
-      <if test="clearStatus != null" >
-        #{clearStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="acqMsgFlag != null" >
-        #{acqMsgFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="issMsgFlag != null" >
-        #{issMsgFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="acqSwFeeAmount != null" >
-        #{acqSwFeeAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="acqSwFeeTp != null" >
-        #{acqSwFeeTp,jdbcType=VARCHAR},
-      </if>
-      <if test="acqSwFeeCode != null" >
-        #{acqSwFeeCode,jdbcType=VARCHAR},
-      </if>
-      <if test="issSwFeeAmount != null" >
-        #{issSwFeeAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="issSwFeeTp != null" >
-        #{issSwFeeTp,jdbcType=VARCHAR},
-      </if>
-      <if test="issSwFeeCode != null" >
-        #{issSwFeeCode,jdbcType=VARCHAR},
-      </if>
-      <if test="interFeeAmount != null" >
-        #{interFeeAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="interFeeDirec != null" >
-        #{interFeeDirec,jdbcType=VARCHAR},
-      </if>
-      <if test="interFeeTp != null" >
-        #{interFeeTp,jdbcType=VARCHAR},
-      </if>
-      <if test="interFeeCode != null" >
-        #{interFeeCode,jdbcType=VARCHAR},
+      <if test="netAmount != null" >
+        #{netAmount,jdbcType=DECIMAL},
       </if>
       <if test="creator != null" >
         #{creator,jdbcType=VARCHAR},
@@ -348,118 +149,37 @@
       <if test="isDeleted != null" >
         #{isDeleted,jdbcType=BIT},
       </if>
-      <if test="pan != null" >
-        #{pan,jdbcType=VARCHAR},
-      </if>
-      <if test="panEncrypt != null" >
-        #{panEncrypt,jdbcType=VARCHAR},
-      </if>
-      <if test="acqSettCfgId != null" >
-        #{acqSettCfgId,jdbcType=VARCHAR},
-      </if>
-      <if test="issSettCfgId != null" >
-        #{issSettCfgId,jdbcType=VARCHAR},
-      </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchDisPreProcessedMsgDO" >
-    update batch_pre_processed_dis_message
+  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchDisSettPostDO" >
+    update batch_disp_sett_post_data
     <set >
-      <if test="msgType != null" >
-        msg_type = #{msgType,jdbcType=VARCHAR},
+      <if test="instId != null" >
+        inst_id = #{instId,jdbcType=VARCHAR},
       </if>
-      <if test="tranSet != null" >
-        tran_set = #{tranSet,jdbcType=VARCHAR},
+      <if test="agentId != null" >
+        agent_id = #{agentId,jdbcType=VARCHAR},
       </if>
-      <if test="pcode != null" >
-        pcode = #{pcode,jdbcType=VARCHAR},
+      <if test="settDate != null" >
+        sett_date = #{settDate,jdbcType=DATE},
       </if>
-      <if test="funcCode != null" >
-        func_code = #{funcCode,jdbcType=VARCHAR},
+      <if test="acqDisAmount != null" >
+        acq_dis_amount = #{acqDisAmount,jdbcType=DECIMAL},
       </if>
-      <if test="mcc != null" >
-        mcc = #{mcc,jdbcType=VARCHAR},
+      <if test="acqDisCount != null" >
+        acq_dis_count = #{acqDisCount,jdbcType=INTEGER},
       </if>
-      <if test="mccGroup != null" >
-        mcc_group = #{mccGroup,jdbcType=VARCHAR},
+      <if test="issDisAmount != null" >
+        iss_dis_amount = #{issDisAmount,jdbcType=DECIMAL},
       </if>
-      <if test="cardPrd != null" >
-        card_prd = #{cardPrd,jdbcType=VARCHAR},
+      <if test="issDisCount != null" >
+        iss_dis_count = #{issDisCount,jdbcType=INTEGER},
       </if>
-      <if test="dispTraceNo != null" >
-        disp_trace_no = #{dispTraceNo,jdbcType=VARCHAR},
+      <if test="reconCcy != null" >
+        recon_ccy = #{reconCcy,jdbcType=VARCHAR},
       </if>
-      <if test="dispAmount != null" >
-        disp_amount = #{dispAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="dispCcy != null" >
-        disp_ccy = #{dispCcy,jdbcType=VARCHAR},
-      </if>
-      <if test="dispDirc != null" >
-        disp_dirc = #{dispDirc,jdbcType=VARCHAR},
-      </if>
-      <if test="disSendIca != null" >
-        dis_send_ica = #{disSendIca,jdbcType=VARCHAR},
-      </if>
-      <if test="disRecvIca != null" >
-        dis_recv_ica = #{disRecvIca,jdbcType=VARCHAR},
-      </if>
-      <if test="origAmount != null" >
-        orig_amount = #{origAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="origAcquirer != null" >
-        orig_acquirer = #{origAcquirer,jdbcType=VARCHAR},
-      </if>
-      <if test="origIssuer != null" >
-        orig_issuer = #{origIssuer,jdbcType=VARCHAR},
-      </if>
-      <if test="origTranLifeCycleId != null" >
-        orig_tran_life_cycle_id = #{origTranLifeCycleId,jdbcType=VARCHAR},
-      </if>
-      <if test="localTime != null" >
-        local_time = #{localTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="clearDate != null" >
-        clear_date = #{clearDate,jdbcType=DATE},
-      </if>
-      <if test="clearStatus != null" >
-        clear_status = #{clearStatus,jdbcType=VARCHAR},
-      </if>
-      <if test="acqMsgFlag != null" >
-        acq_msg_flag = #{acqMsgFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="issMsgFlag != null" >
-        iss_msg_flag = #{issMsgFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="acqSwFeeAmount != null" >
-        acq_sw_fee_amount = #{acqSwFeeAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="acqSwFeeTp != null" >
-        acq_sw_fee_tp = #{acqSwFeeTp,jdbcType=VARCHAR},
-      </if>
-      <if test="acqSwFeeCode != null" >
-        acq_sw_fee_code = #{acqSwFeeCode,jdbcType=VARCHAR},
-      </if>
-      <if test="issSwFeeAmount != null" >
-        iss_sw_fee_amount = #{issSwFeeAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="issSwFeeTp != null" >
-        iss_sw_fee_tp = #{issSwFeeTp,jdbcType=VARCHAR},
-      </if>
-      <if test="issSwFeeCode != null" >
-        iss_sw_fee_code = #{issSwFeeCode,jdbcType=VARCHAR},
-      </if>
-      <if test="interFeeAmount != null" >
-        inter_fee_amount = #{interFeeAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="interFeeDirec != null" >
-        inter_fee_direc = #{interFeeDirec,jdbcType=VARCHAR},
-      </if>
-      <if test="interFeeTp != null" >
-        inter_fee_tp = #{interFeeTp,jdbcType=VARCHAR},
-      </if>
-      <if test="interFeeCode != null" >
-        inter_fee_code = #{interFeeCode,jdbcType=VARCHAR},
+      <if test="netAmount != null" >
+        net_amount = #{netAmount,jdbcType=DECIMAL},
       </if>
       <if test="creator != null" >
         creator = #{creator,jdbcType=VARCHAR},
@@ -479,65 +199,26 @@
       <if test="isDeleted != null" >
         is_deleted = #{isDeleted,jdbcType=BIT},
       </if>
-      <if test="pan != null" >
-        pan = #{pan,jdbcType=VARCHAR},
-      </if>
-      <if test="panEncrypt != null" >
-        pan_encrypt = #{panEncrypt,jdbcType=VARCHAR},
-      </if>
-      <if test="acqSettCfgId != null" >
-        acq_sett_cfg_id = #{acqSettCfgId,jdbcType=VARCHAR},
-      </if>
-      <if test="issSettCfgId != null" >
-        iss_sett_cfg_id = #{issSettCfgId,jdbcType=VARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchDisPreProcessedMsgDO" >
-    update batch_pre_processed_dis_message
-    set msg_type = #{msgType,jdbcType=VARCHAR},
-      tran_set = #{tranSet,jdbcType=VARCHAR},
-      pcode = #{pcode,jdbcType=VARCHAR},
-      func_code = #{funcCode,jdbcType=VARCHAR},
-      mcc = #{mcc,jdbcType=VARCHAR},
-      mcc_group = #{mccGroup,jdbcType=VARCHAR},
-      card_prd = #{cardPrd,jdbcType=VARCHAR},
-      disp_trace_no = #{dispTraceNo,jdbcType=VARCHAR},
-      disp_amount = #{dispAmount,jdbcType=DECIMAL},
-      disp_ccy = #{dispCcy,jdbcType=VARCHAR},
-      disp_dirc = #{dispDirc,jdbcType=VARCHAR},
-      dis_send_ica = #{disSendIca,jdbcType=VARCHAR},
-      dis_recv_ica = #{disRecvIca,jdbcType=VARCHAR},
-      orig_amount = #{origAmount,jdbcType=DECIMAL},
-      orig_acquirer = #{origAcquirer,jdbcType=VARCHAR},
-      orig_issuer = #{origIssuer,jdbcType=VARCHAR},
-      orig_tran_life_cycle_id = #{origTranLifeCycleId,jdbcType=VARCHAR},
-      local_time = #{localTime,jdbcType=TIMESTAMP},
-      clear_date = #{clearDate,jdbcType=DATE},
-      clear_status = #{clearStatus,jdbcType=VARCHAR},
-      acq_msg_flag = #{acqMsgFlag,jdbcType=VARCHAR},
-      iss_msg_flag = #{issMsgFlag,jdbcType=VARCHAR},
-      acq_sw_fee_amount = #{acqSwFeeAmount,jdbcType=DECIMAL},
-      acq_sw_fee_tp = #{acqSwFeeTp,jdbcType=VARCHAR},
-      acq_sw_fee_code = #{acqSwFeeCode,jdbcType=VARCHAR},
-      iss_sw_fee_amount = #{issSwFeeAmount,jdbcType=DECIMAL},
-      iss_sw_fee_tp = #{issSwFeeTp,jdbcType=VARCHAR},
-      iss_sw_fee_code = #{issSwFeeCode,jdbcType=VARCHAR},
-      inter_fee_amount = #{interFeeAmount,jdbcType=DECIMAL},
-      inter_fee_direc = #{interFeeDirec,jdbcType=VARCHAR},
-      inter_fee_tp = #{interFeeTp,jdbcType=VARCHAR},
-      inter_fee_code = #{interFeeCode,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchDisSettPostDO" >
+    update batch_disp_sett_post_data
+    set inst_id = #{instId,jdbcType=VARCHAR},
+      agent_id = #{agentId,jdbcType=VARCHAR},
+      sett_date = #{settDate,jdbcType=DATE},
+      acq_dis_amount = #{acqDisAmount,jdbcType=DECIMAL},
+      acq_dis_count = #{acqDisCount,jdbcType=INTEGER},
+      iss_dis_amount = #{issDisAmount,jdbcType=DECIMAL},
+      iss_dis_count = #{issDisCount,jdbcType=INTEGER},
+      recon_ccy = #{reconCcy,jdbcType=VARCHAR},
+      net_amount = #{netAmount,jdbcType=DECIMAL},
       creator = #{creator,jdbcType=VARCHAR},
       create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
       modifier = #{modifier,jdbcType=VARCHAR},
       modify_datetime = #{modifyDatetime,jdbcType=TIMESTAMP},
       is_enable = #{isEnable,jdbcType=BIT},
-      is_deleted = #{isDeleted,jdbcType=BIT},
-      pan = #{pan,jdbcType=VARCHAR},
-      pan_encrypt = #{panEncrypt,jdbcType=VARCHAR},
-      acq_sett_cfg_id = #{acqSettCfgId,jdbcType=VARCHAR},
-      iss_sett_cfg_id = #{issSettCfgId,jdbcType=VARCHAR}
+      is_deleted = #{isDeleted,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
