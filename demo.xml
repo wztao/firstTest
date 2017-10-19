@@ -1,107 +1,83 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <Document>
-<MsgHdr>
-<MsgCgy>UNIP</MsgCgy>
-<TstFlg>P</TstFlg>
-<VerId>10</VerId>
-<SndrFinInstnId>BKCHCNBJXXX</SndrFinInstnId>
-<SndrSysId>CIPS</SndrSysId>
-<RcvrFinInstnId>EIGPCNBJXXX</RcvrFinInstnId>
-<RcvrSysId>CIPS</RcvrSysId>
-<CreDt>false</CreDt>
-<MsgDefIdr>cut.001.000.01</MsgDefIdr>
-<BizMsgIdr>226275437</BizMsgIdr>
-<BizMsgRefIdr>2627575757</BizMsgRefIdr>
-<Prty>3</Prty>
-<MsgDirc>I</MsgDirc>
-<PssblDplct>false</PssblDplct>
-<EPMId>252636373753</EPMId>
-</MsgHdr>
-<UPMBody>
-<MsgHdrInfo>
-<MsgDefIdr>
-<InMsgTp>cuct.001.000.01</InMsgTp>
-<OrgtMsgTp>cips.111.001.01</OrgtMsgTp>
-</MsgDefIdr>
-</MsgHdrInfo>
-<MsgId>CIPS2016090813585130369272001518</MsgId>
-<TxId>cipszhuanhui090841</TxId>
-<EndToEndId>DB00005800000001</EndToEndId>
-<TxTp>GOD</TxTp>
-<SttlmPrty>URGT</SttlmPrty>
-<SttlmMtd>CLRG</SttlmMtd>
-<IOFlg>I</IOFlg>
-<ExMsgInfo>
-<ExMsgId>2016083100000089</ExMsgId>
-</ExMsgInfo>
-<Amt>
-<IntrBkSttlmAmt>
-<Ccy>CNY</Ccy>
-<Amt>2184.79</Amt>
-</IntrBkSttlmAmt>
-</Amt>
-<DateInfo>
-<OrgLocDtTm>2014-12-17T09:30:47</OrgLocDtTm>
-<Vdate>
-<Vdate>2014-12-17</Vdate>
-</Vdate>
-</DateInfo>
-<Fee>
-<ChrgBr>SHAR</ChrgBr>
-<ChrgAmt>
-<Ccy>CNY</Ccy>
-<Amt>40.00</Amt>
-<Agt>BKCHCNBJXXX</Agt>
-</ChrgAmt>
-</Fee>
-<Sndr>
-<Id>BKCHCNBJXXX</Id>
-<BrnchId>BKCHCNBJ110</BrnchId>
-</Sndr>
-<Rcvr>
-<Id>EIGPCNBJXXX</Id>
-<BrnchId>EIGPCNBJ110</BrnchId>
-</Rcvr>
-<DbtrInf>
-<Dbtr>
-<Nm>Name</Nm>
-<PstlAddr>rrrtr</PstlAddr>
-</Dbtr>
-<DbtrAcct>
-<Idr>901222288883455</Idr>
-</DbtrAcct>
-</DbtrInf>
-<DbtrAgtInf>
-<DbtrAgt>
-<Id>UBSWCNBJXXX</Id>
-<Nm>UBS</Nm>
-</DbtrAgt>
-</DbtrAgtInf>
-<CdtrAgtInf>
-<CdtrAgt>
-<Id>EIGPUS33XXX</Id>
-<Nm>EIGPAY</Nm>
-</CdtrAgt>
-</CdtrAgtInf>
-<CdtrInf>
-<Cdtr>
-<Nm>Name</Nm>
-<PstlAddr>ryyyyyy</PstlAddr>
-</Cdtr>
-<CdtrAcct>
-<Idr>706888856432076</Idr>
-</CdtrAcct>
-</CdtrInf>
-<CmtInf>
-<PlcAndNm>/Document/FIToFICstmrCdtTrf/CdtTrfTxInf</PlcAndNm>
-<AdvcRmtInf>
-<CustRmtInf>Name</CustRmtInf>
-</AdvcRmtInf>
-</CmtInf>
-<RspnInf>
-<BizSts>1002</BizSts>
-<RjctRsnCd>Reject reason</RjctRsnCd>
-</RspnInf>
-</UPMBody>
+	<MsgHdr>
+		<MsgCgy>UNIP</MsgCgy>
+		<TstFlg>P</TstFlg>
+		<VerId>1.00</VerId>
+		<SndrSysId>sp_paytrans</SndrSysId>
+		<RcvrSysId>sp_payment</RcvrSysId>
+		<CreDt>2017-10-18T17:01:31</CreDt>
+		<Prty>3</Prty>
+		<MsgDirc>O</MsgDirc>
+		<PssblDplct>false</PssblDplct>
+	</MsgHdr>
+	<UPMBody>
+		<MsgHdrInfo>
+			<MsgDefIdr>
+				<InMsgTp>cuct.001.002.02</InMsgTp>
+			</MsgDefIdr>
+		</MsgHdrInfo>
+		<MsgId>5E8160D0093C4DC8A14E7E176A4F0BAF</MsgId>
+		<TxTp>62</TxTp>
+		<TntInstId>9001</TntInstId>
+		<TotOrdId>12345</TotOrdId>
+		<OrderId>1508317290763x10578665862</OrderId>
+		<PmtTp>03</PmtTp>
+		<Chnl>
+			<ChnlTp>01</ChnlTp>
+			<ChnlId>1000001</ChnlId>
+			<ReqSrcTp>02</ReqSrcTp>
+			<AcqId>03</AcqId>
+			<ChnlRetUrl>gfdsfdsa</ChnlRetUrl>
+			<ChnlNotfUrl>sdfghggfd</ChnlNotfUrl>
+			<ChnlReqIP>127.0.0.1</ChnlReqIP>
+			<POI>
+				<MrchId>00000001</MrchId>
+				<ProdId></ProdId>
+			</POI>
+		</Chnl>
+		<Amt>
+			<DbtAmt>
+				<Ccy>CNY</Ccy>
+			</DbtAmt>
+			<TxAmt>
+				<Ccy>CNY</Ccy>
+				<Amt>100</Amt>
+			</TxAmt>
+			<CuTxAmt>
+				<Ccy>cny</Ccy>
+				<Amt>100</Amt>
+			</CuTxAmt>
+			<PlTxAmt>
+				<Ccy>cny</Ccy>
+				<Amt>0</Amt>
+			</PlTxAmt>
+			<TxScore>0</TxScore>
+		</Amt>
+		<DateInfo>
+			<OrgLocDtTm>2017-10-18T17:01:31</OrgLocDtTm>
+			<RcvTm>2017-08-05T10:52:08</RcvTm>
+		</DateInfo>
+		<Sndr>
+			<Id>9001</Id>
+		</Sndr>
+		<DbtrInf>
+			<Dbtr>
+				<ClntId>66664000000198210000</ClntId>
+				<CustCgy>O</CustCgy>
+			</Dbtr>
+			<DbtrAcct>
+				<IdrTp>101</IdrTp>
+				<BkCardNo>6217002020021595096</BkCardNo>
+			</DbtrAcct>
+		</DbtrInf>
+		<DbtrAgtInf>
+			<DbtrAgt>
+				<Id>JRJG00002</Id>
+			</DbtrAgt>
+		</DbtrAgtInf>
+		<CmtInf>
+			<Remark>dffd</Remark>
+		</CmtInf>
+	</UPMBody>
 </Document>
