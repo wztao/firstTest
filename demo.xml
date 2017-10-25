@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.eigpay.feesnode.infra.dao.BatchAckReportDataDOMapper" >
-  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchAckReportDataDO" >
+<mapper namespace="com.eigpay.feesnode.infra.dao.BatchNotiReportDataDOMapper" >
+  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchNotiReportDataDO" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="inst_id" property="instId" jdbcType="VARCHAR" />
     <result column="clear_date" property="clearDate" jdbcType="DATE" />
@@ -36,15 +36,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from batch_ack_report_data
+    from batch_noti_report_data
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from batch_ack_report_data
+    delete from batch_noti_report_data
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchAckReportDataDO" >
-    insert into batch_ack_report_data (id, inst_id, clear_date, 
+  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchNotiReportDataDO" >
+    insert into batch_noti_report_data (id, inst_id, clear_date, 
       card_prd, busi_serv_level, busi_serv_id, 
       file_id, settle_ind, func_code, 
       pcode, orig_or_rev, inter_rate_des, 
@@ -63,8 +63,8 @@
       #{modifyDatetime,jdbcType=TIMESTAMP}, #{isEnable,jdbcType=BIT}, #{isDeleted,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchAckReportDataDO" >
-    insert into batch_ack_report_data
+  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchNotiReportDataDO" >
+    insert into batch_noti_report_data
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -214,8 +214,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchAckReportDataDO" >
-    update batch_ack_report_data
+  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchNotiReportDataDO" >
+    update batch_noti_report_data
     <set >
       <if test="instId != null" >
         inst_id = #{instId,jdbcType=VARCHAR},
@@ -289,8 +289,8 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchAckReportDataDO" >
-    update batch_ack_report_data
+  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchNotiReportDataDO" >
+    update batch_noti_report_data
     set inst_id = #{instId,jdbcType=VARCHAR},
       clear_date = #{clearDate,jdbcType=DATE},
       card_prd = #{cardPrd,jdbcType=VARCHAR},
