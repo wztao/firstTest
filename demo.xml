@@ -1,83 +1,235 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Document>
-	<MsgHdr>
-		<MsgCgy>UNIP</MsgCgy>
-		<TstFlg>P</TstFlg>
-		<VerId>1.00</VerId>
-		<SndrSysId>sp_paytrans</SndrSysId>
-		<RcvrSysId>sp_payment</RcvrSysId>
-		<CreDt>2017-10-18T17:01:31</CreDt>
-		<Prty>3</Prty>
-		<MsgDirc>O</MsgDirc>
-		<PssblDplct>false</PssblDplct>
-	</MsgHdr>
-	<UPMBody>
-		<MsgHdrInfo>
-			<MsgDefIdr>
-				<InMsgTp>cuct.001.002.02</InMsgTp>
-			</MsgDefIdr>
-		</MsgHdrInfo>
-		<MsgId>5E8160D0093C4DC8A14E7E176A4F0BAF</MsgId>
-		<TxTp>62</TxTp>
-		<TntInstId>9001</TntInstId>
-		<TotOrdId>12345</TotOrdId>
-		<OrderId>1508317290763x10578665862</OrderId>
-		<PmtTp>03</PmtTp>
-		<Chnl>
-			<ChnlTp>01</ChnlTp>
-			<ChnlId>1000001</ChnlId>
-			<ReqSrcTp>02</ReqSrcTp>
-			<AcqId>03</AcqId>
-			<ChnlRetUrl>gfdsfdsa</ChnlRetUrl>
-			<ChnlNotfUrl>sdfghggfd</ChnlNotfUrl>
-			<ChnlReqIP>127.0.0.1</ChnlReqIP>
-			<POI>
-				<MrchId>00000001</MrchId>
-				<ProdId></ProdId>
-			</POI>
-		</Chnl>
-		<Amt>
-			<DbtAmt>
-				<Ccy>CNY</Ccy>
-			</DbtAmt>
-			<TxAmt>
-				<Ccy>CNY</Ccy>
-				<Amt>100</Amt>
-			</TxAmt>
-			<CuTxAmt>
-				<Ccy>cny</Ccy>
-				<Amt>100</Amt>
-			</CuTxAmt>
-			<PlTxAmt>
-				<Ccy>cny</Ccy>
-				<Amt>0</Amt>
-			</PlTxAmt>
-			<TxScore>0</TxScore>
-		</Amt>
-		<DateInfo>
-			<OrgLocDtTm>2017-10-18T17:01:31</OrgLocDtTm>
-			<RcvTm>2017-08-05T10:52:08</RcvTm>
-		</DateInfo>
-		<Sndr>
-			<Id>9001</Id>
-		</Sndr>
-		<DbtrInf>
-			<Dbtr>
-				<ClntId>66664000000198210000</ClntId>
-				<CustCgy>O</CustCgy>
-			</Dbtr>
-			<DbtrAcct>
-				<IdrTp>101</IdrTp>
-				<BkCardNo>6217002020021595096</BkCardNo>
-			</DbtrAcct>
-		</DbtrInf>
-		<DbtrAgtInf>
-			<DbtrAgt>
-				<Id>JRJG00002</Id>
-			</DbtrAgt>
-		</DbtrAgtInf>
-		<CmtInf>
-			<Remark>dffd</Remark>
-		</CmtInf>
-	</UPMBody>
-</Document>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eigpay.feesnode.infra.dao.BatchClearSumReportDataDOMapper" >
+  <resultMap id="BaseResultMap" type="com.eigpay.feesnode.core.model.BatchClearSumReportDataDO" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="inst_id" property="instId" jdbcType="VARCHAR" />
+    <result column="clear_date" property="clearDate" jdbcType="DATE" />
+    <result column="card_prd" property="cardPrd" jdbcType="VARCHAR" />
+    <result column="inst_role" property="instRole" jdbcType="VARCHAR" />
+    <result column="busi_serv_level" property="busiServLevel" jdbcType="VARCHAR" />
+    <result column="busi_serv_id" property="busiServId" jdbcType="VARCHAR" />
+    <result column="file_id" property="fileId" jdbcType="VARCHAR" />
+    <result column="recon_ccy" property="reconCcy" jdbcType="VARCHAR" />
+    <result column="net_amount" property="netAmount" jdbcType="DECIMAL" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="modifier" property="modifier" jdbcType="VARCHAR" />
+    <result column="modify_datetime" property="modifyDatetime" jdbcType="TIMESTAMP" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="is_deleted" property="isDeleted" jdbcType="BIT" />
+    <result column="clear_cycle_id" property="clearCycleId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, inst_id, clear_date, card_prd, inst_role, busi_serv_level, busi_serv_id, file_id, 
+    recon_ccy, net_amount, creator, create_datetime, modifier, modify_datetime, is_enable, 
+    is_deleted, clear_cycle_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from batch_clear_sum_report_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from batch_clear_sum_report_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.eigpay.feesnode.core.model.BatchClearSumReportDataDO" >
+    insert into batch_clear_sum_report_data (id, inst_id, clear_date, 
+      card_prd, inst_role, busi_serv_level, 
+      busi_serv_id, file_id, recon_ccy, 
+      net_amount, creator, create_datetime, 
+      modifier, modify_datetime, is_enable, 
+      is_deleted, clear_cycle_id)
+    values (#{id,jdbcType=BIGINT}, #{instId,jdbcType=VARCHAR}, #{clearDate,jdbcType=DATE}, 
+      #{cardPrd,jdbcType=VARCHAR}, #{instRole,jdbcType=VARCHAR}, #{busiServLevel,jdbcType=VARCHAR}, 
+      #{busiServId,jdbcType=VARCHAR}, #{fileId,jdbcType=VARCHAR}, #{reconCcy,jdbcType=VARCHAR}, 
+      #{netAmount,jdbcType=DECIMAL}, #{creator,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{modifier,jdbcType=VARCHAR}, #{modifyDatetime,jdbcType=TIMESTAMP}, #{isEnable,jdbcType=BIT}, 
+      #{isDeleted,jdbcType=BIT}, #{clearCycleId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eigpay.feesnode.core.model.BatchClearSumReportDataDO" >
+    insert into batch_clear_sum_report_data
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="instId != null" >
+        inst_id,
+      </if>
+      <if test="clearDate != null" >
+        clear_date,
+      </if>
+      <if test="cardPrd != null" >
+        card_prd,
+      </if>
+      <if test="instRole != null" >
+        inst_role,
+      </if>
+      <if test="busiServLevel != null" >
+        busi_serv_level,
+      </if>
+      <if test="busiServId != null" >
+        busi_serv_id,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="reconCcy != null" >
+        recon_ccy,
+      </if>
+      <if test="netAmount != null" >
+        net_amount,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="modifier != null" >
+        modifier,
+      </if>
+      <if test="modifyDatetime != null" >
+        modify_datetime,
+      </if>
+      <if test="isEnable != null" >
+        is_enable,
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
+      <if test="clearCycleId != null" >
+        clear_cycle_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="instId != null" >
+        #{instId,jdbcType=VARCHAR},
+      </if>
+      <if test="clearDate != null" >
+        #{clearDate,jdbcType=DATE},
+      </if>
+      <if test="cardPrd != null" >
+        #{cardPrd,jdbcType=VARCHAR},
+      </if>
+      <if test="instRole != null" >
+        #{instRole,jdbcType=VARCHAR},
+      </if>
+      <if test="busiServLevel != null" >
+        #{busiServLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="busiServId != null" >
+        #{busiServId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="reconCcy != null" >
+        #{reconCcy,jdbcType=VARCHAR},
+      </if>
+      <if test="netAmount != null" >
+        #{netAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDatetime != null" >
+        #{modifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnable != null" >
+        #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="clearCycleId != null" >
+        #{clearCycleId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eigpay.feesnode.core.model.BatchClearSumReportDataDO" >
+    update batch_clear_sum_report_data
+    <set >
+      <if test="instId != null" >
+        inst_id = #{instId,jdbcType=VARCHAR},
+      </if>
+      <if test="clearDate != null" >
+        clear_date = #{clearDate,jdbcType=DATE},
+      </if>
+      <if test="cardPrd != null" >
+        card_prd = #{cardPrd,jdbcType=VARCHAR},
+      </if>
+      <if test="instRole != null" >
+        inst_role = #{instRole,jdbcType=VARCHAR},
+      </if>
+      <if test="busiServLevel != null" >
+        busi_serv_level = #{busiServLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="busiServId != null" >
+        busi_serv_id = #{busiServId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="reconCcy != null" >
+        recon_ccy = #{reconCcy,jdbcType=VARCHAR},
+      </if>
+      <if test="netAmount != null" >
+        net_amount = #{netAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null" >
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDatetime != null" >
+        modify_datetime = #{modifyDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isEnable != null" >
+        is_enable = #{isEnable,jdbcType=BIT},
+      </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+      <if test="clearCycleId != null" >
+        clear_cycle_id = #{clearCycleId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eigpay.feesnode.core.model.BatchClearSumReportDataDO" >
+    update batch_clear_sum_report_data
+    set inst_id = #{instId,jdbcType=VARCHAR},
+      clear_date = #{clearDate,jdbcType=DATE},
+      card_prd = #{cardPrd,jdbcType=VARCHAR},
+      inst_role = #{instRole,jdbcType=VARCHAR},
+      busi_serv_level = #{busiServLevel,jdbcType=VARCHAR},
+      busi_serv_id = #{busiServId,jdbcType=VARCHAR},
+      file_id = #{fileId,jdbcType=VARCHAR},
+      recon_ccy = #{reconCcy,jdbcType=VARCHAR},
+      net_amount = #{netAmount,jdbcType=DECIMAL},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      modify_datetime = #{modifyDatetime,jdbcType=TIMESTAMP},
+      is_enable = #{isEnable,jdbcType=BIT},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      clear_cycle_id = #{clearCycleId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
